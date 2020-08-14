@@ -129,13 +129,10 @@
   text-align: left;
   margin: 0 0 0 1em; }
 
-
 .reveal hr {
   border: 2px solid #f19a3e;
   margin: 0 0;
-  border-radius: 1px;
-
-}
+  border-radius: 1px; }
 
 .reveal ol {
   list-style-type: decimal; }
