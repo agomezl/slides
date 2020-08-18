@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Template slide</title>
+    <title>Licentiate Seminar</title>
 
     <link rel="stylesheet" href="../dist/reset.css">
     <link rel="stylesheet" href="../dist/reveal.css">
@@ -21,11 +21,50 @@
       <div class="slides">
         <!-- INTRO -->
         <section>
+
           <section style="text-align: right;">
             <h4>Choreographies and Cost Semantics for <br/> Reliable Communicating Systems</h4>
             <hr/>
             <p>Alejandro Gómez-Londoño</p>
+            <p>27th August 2020</p>
           </section>
+
+          <section>
+            <h4>Motivation</h4>
+            <hr/>
+          </section>
+
+          <section>
+            <blockquote>
+              Communicating systems are everywhere
+            </blockquote>
+          </section>
+
+          <section>
+              <p>But as any other computer program they have bugs and occasionally fail</p>
+              <p style="text-align: right;" class="fragment fade-up">... bummer!</p>
+          </section>
+
+          <section>
+            <p>This thesis focuses on preventing two specific ways communicating systems fail</p>
+            <div class="fragment fade-up">
+              <hr/>
+              <p/>
+              <ul>
+                <li>Communication inconsistencies</li>
+                <li>Component out-of-memory errors</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <p>Communication inconsistencies</p>
+          </section>
+
+          <section>
+            <p>Component out-of-memory errors</p>
+          </section>
+
         </section>
 
         <!-- Choreographies -->
@@ -34,6 +73,35 @@
             <h4>Choreographies</h4>
             <hr/>
           </section>
+
+          <section data-background="https://media.giphy.com/media/ckwE6EJuhyRYtKCAvI/giphy.gif">
+            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 10px;">
+              <h2> What is a choreography?</h2>
+            </div>
+          </section>
+
+          <section>
+
+          </section>
+
+          <section>
+            <p>2 Buyers protocol</p>
+            <div class="r-hstack justify-start">
+              <pre style="width:50%;"><code class="hljs" data-trim data-line-numbers>
+                  A.x -> B.y;
+                  C.y -> D.w;
+              </code></pre>
+              <div style="width:200px;">
+              </div>
+              <pre style="width:50%;"><code class="hljs" data-trim data-line-numbers>
+                  A.x -> B.y;
+                  C.y -> D.w;
+                  A.x -> B.y;
+                  C.y -> D.w;
+              </code></pre>
+            </div>
+          </section>
+
         </section>
 
         <!-- Cost semantics -->
