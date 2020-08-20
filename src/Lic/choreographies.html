@@ -189,7 +189,7 @@
     <div style="width:45%;">
       <pre><code class="hljs js" data-trim data-line-numbers>
         let x@a = crunch()
-        a.x -> b.x
+        a[x] -> b.x
         let y@b = crunch(x)
       </code></pre>
     </div>
@@ -218,7 +218,7 @@
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
         let x@a = crunch()
-        a.x -> b.x
+        a[x] -> b.x
         let y@b = crunch(x)
       </code></pre>
     </div>
@@ -243,16 +243,15 @@
     </div>
   </div>
 </section>
-
 
 <section data-auto-animate>
   <div class="r-hstack items-center">
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
         let x@a = crunch()
-        a.x -> b.x
+        a[x] -> b.x
         let y@b = crunch(x)
-        b.y -> a.y
+        b[y] -> a.y
       </code></pre>
     </div>
     <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
@@ -277,6 +276,142 @@
   </div>
 </section>
 
+<section>
+  <table class="grammar">
+    <tbody>
+      <tr><td><code>G</code></td><td><code>::=</code></td>
+          <td><code>A[x] -> B.y; G</code></td><td>(Com)</td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code>A&lt;b&gt; -> B; G</code></td><td>(Sel)</td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span style="color:rgb(227, 206, 171);">Let</span> x@a = foo(..); G</code></td><td>(Let)</td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>If</span> x@a
+                    <span keyword>Then</span> G
+                    <span keyword>Else</span> G</code></td><td>(If)</td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>End</span></code></td><td>(End)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h3>$(s,c) \to (s',c')$</h3>
+  <div class="fragment fade-up" style="margin-top:1em">
+    <hr/>
+    <p style="text-align:left">Where:</p>
+    <ul>
+      <li>$c$ and $c'$ are choreographies</li>
+      <li>$s$ and $s'$ are mappings from pairs of process and
+        variables to values</li>
+    </ul>
+  </div>
+</section>
+
+<!-- <section data-auto-animate>
+     <p style="text-align:left">Communication:</p>
+     <table class="rule">
+     <tbody>
+     <tr data-id="i0"><td><code>s(p,x)=d</code></td><td><code>p!=q</code></td></tr>
+     <tr><td colspan="2"><code>(s,<span data-id="i1">p[x]->q.y</span>;c) ==> (<span data-id="i2">s[(q,y)|->d]</span>,c)</code></td></tr>
+     </tbody>
+     </table>
+     </section> -->
+
+<!-- <section data-auto-animate>
+     <p style="text-align:left">Communication:</p>
+     <table class="rule">
+     <tbody>
+     <tr data-id="i0"><td><code>s(p,x)=d</code></td><td><code>p!=q</code></td></tr>
+     <tr><td colspan="2"><code>(s,<span hl data-id="i1">p[x]->q.y</span>;c) ==> (<span hl data-id="i2">s[(q,y)|->d]</span>,c)</code></td></tr>
+     </tbody>
+     </table>
+     </section> -->
+
+<!-- Communication rule -->
+<section>
+  <p style="text-align:left">Communication:</p>
+  <table class="rule">
+    <tbody>
+      <tr><td>$s(p,x)=d$</td><td>$p \neq q$</td></tr>
+      <tr><td colspan="2">$(s,p[x] \to q.y ; c) \xrightarrow{(\text{com p x q y},[])}  (s[(q,y) \mapsto d], c)$</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- <section>
+     <p style="text-align:left">Selection:</p>
+     <table class="rule">
+     <tbody>
+     <tr><td><code>p!=q</code></td></tr>
+     <tr><td><code>(s,p&lt;b&gt;->q.y</span>;c) -> (s,c)</code></td></tr>
+     </tbody>
+     </table>
+     </section> -->
+
+<!-- Selection rule -->
+<section>
+  <p style="text-align:left">Selection:</p>
+  <table class="rule">
+    <tbody>
+      <tr><td>$p \neq q$</td></tr>
+      <tr><td>$(s,p\langle b\rangle \to q.y ; c) \xrightarrow{(\text{Sel p b q},[])}  (s, c)$</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Branching rule -->
+<section>
+  <p style="text-align:left">Branching:</p>
+  <table class="rule">
+    <tbody>
+      <tr><td>$s(p,v)=\top$</td></tr>
+      <tr><td>$(s, \text{If}\,a@p\,\text{Then}\,c_1\,\text{Else}\,c_2) \xrightarrow{(\text{LTau p v},[])} (s, c_1)$</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <p>Features</p>
+  <ul>
+    <li>Swapping</li>
+    <li>Asyncrony</li>
+  </ul>
+</section>
+
+<section>
+  <p>Properties</p>
+  <ul>
+    <li>Confluence</li>
+    <li>Deadlock-freedom</li>
+  </ul>
+</section>
+
+<section>
+  <p>End point projection</p>
+</section>
+
+<section>
+  <p>Projectability</p>
+</section>
+
+<section>
+  <p>The road to CakeML</p>
+  <ul>
+    <li>EPN</li>
+    <li>EPN payload size</li>
+    <li>EPN with encoded selection</li>
+  </ul>
+</section>
+
+
+<section>
+  <p>Final theorem</p>
+</section>
+
+<section>
+  <p>Demo</p>
+</section>
 
 <section>
   <pre><code class="hljs haskell">

@@ -182,7 +182,7 @@
   width: 90%;
   margin: 20px auto;
   text-align: left;
-  font-size: 0.55em;
+  font-size: 0.60em;
   font-family: JetBrainsMono;
   line-height: 1.2em;
   word-wrap: break-word;
@@ -211,7 +211,7 @@
 .reveal table td {
   text-align: left;
   padding: 0.2em 0.5em 0.2em 0.5em;
-  border-bottom: 1px solid; }
+  border-bottom: 2px solid; }
 
 .reveal table th[align="center"],
 .reveal table td[align="center"] {
@@ -301,10 +301,49 @@
  * Shapes
  *********************************************/
 
+.reveal table.grammar {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal table.rule {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.reveal table.grammar tr td{
+    border : none;
+    border-top: none;
+    border-bottom: none;
+    text-align : left;
+}
+
+.reveal table.grammar tr td{
+    border : none;
+    border-top: none;
+    border-bottom: none;
+    text-align : left;
+}
+
+.reveal table.rule td{
+    text-align : center;
+    padding: 0.5em 0.5em 0.2em 0.5em;
+}
+
+
+.reveal code > span[keyword] {
+    color:rgb(227, 206, 171);
+}
+
 .reveal .vl {
     border-left: 2px solid #f19a3e;
     border-radius: 1px;
     align-self:center
     ;
     height: 100%;
+}
+
+.reveal span[hl] {
+    color : #f19a3e
 }
