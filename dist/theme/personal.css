@@ -195,7 +195,7 @@
 .reveal pre code {
   display: block;
   padding: 5px;
-  overflow: auto;
+  overflow: hidden;
   max-height: 400px;
   word-wrap: normal; }
 
@@ -295,3 +295,16 @@
 @media print {
   .backgrounds {
     background-color: #2b2b2b; } }
+
+
+/*********************************************
+ * Shapes
+ *********************************************/
+
+.reveal .vl {
+    border-left: 2px solid #f19a3e;
+    border-radius: 1px;
+    align-self:center
+    ;
+    height: 100%;
+}

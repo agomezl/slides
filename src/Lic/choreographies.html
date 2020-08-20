@@ -1,0 +1,293 @@
+<section>
+  <h4>Choreographies</h4>
+  <hr/>
+</section>
+
+<section data-background="https://media.giphy.com/media/ckwE6EJuhyRYtKCAvI/giphy.gif">
+  <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 10px;">
+    <h2> What is a choreography?</h2>
+  </div>
+</section>
+
+<section>
+  <blockquote>
+    Choreographies are a way of describing communicating
+    systems as global programs
+  </blockquote>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python" data-trim
+                                  data-line-numbers="2">
+        x = crunch()
+        send("b",x)
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p>B</p>
+      <pre data-id="b-code"><code class="hljs python"
+                                  data-trim data-line-numbers="1">
+        x = receive("a")
+        y = crunch(x)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python" data-trim
+                                  data-line-numbers="2">
+        x = crunch()
+        send("b",x)
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p>B</p>
+      <pre data-id="b-code"><code class="hljs python" data-trim
+                                  data-line-numbers="1,3">
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python"
+                                  data-trim data-line-numbers="2,3">
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p>B</p>
+      <pre data-id="b-code"><code class="hljs python"
+                                  data-trim data-line-numbers="1,3">
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python"
+                                  data-trim data-line-numbers="4-8">
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+        if y > 100:
+          z = crunch(y)
+          send("b",z)
+        else:
+          exit 1
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p>B</p>
+      <pre data-id="b-code"><code class="hljs python"
+                                  data-trim data-line-numbers="1,3">
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python"
+                                  data-trim data-line-numbers="4-8">
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+        if y > 100:
+          z = crunch(y)
+          send("b",z)
+        else:
+          exit 1
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p>B</p>
+      <pre data-id="b-code"><code class="hljs python"
+                                  data-trim data-line-numbers="4-8">
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+        if y > 100:
+          z = receive("a")
+          ...
+        else:
+          exit 1
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code"><code class="hljs python"
+                                  data-trim data-line-numbers="4-8">
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+        z = crunch(y)
+        if z > 100:
+          send("b",z)
+        else:
+          exit 1
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+    </div>
+    <div style="width:45%;">
+      <p data-id="b-title">B</p>
+      <pre data-id="b-code"><code class="hljs python"
+                                  data-trim data-line-numbers>
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+      <h2 class="fragment fade-up">?</h2>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <pre><code class="hljs js" data-trim data-line-numbers>
+        let x@a = crunch()
+        a.x -> b.x
+        let y@b = crunch(x)
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div class="fragment fade-left" style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = crunch()
+        send("b",x)
+      </code></pre>
+      <p>B</p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = receive("a")
+        y = crunch(x)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        let x@a = crunch()
+        a.x -> b.x
+        let y@b = crunch(x)
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+      </code></pre>
+      <p>B</p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        let x@a = crunch()
+        a.x -> b.x
+        let y@b = crunch(x)
+        b.y -> a.y
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+      </code></pre>
+      <p>B</p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers>
+        x = receive("a")
+        y = crunch(x)
+        send("a",y)
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <pre><code class="hljs haskell">
+    let x@a = crunch()
+    a.x -> b.x
+    let y@b = crunch(x)
+    b.y -> a.y
+    if y > 100:
+      let z@a = crunch(y)
+      a.z -> b.z
+    else
+      -- do nothing
+  </code></pre>
+</section>
