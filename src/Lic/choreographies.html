@@ -16,6 +16,7 @@
   </blockquote>
 </section>
 
+<!-- Program A & B animation -->
 <section data-auto-animate>
   <div class="r-hstack items-start">
     <div style="width:45%;">
@@ -184,6 +185,7 @@
   </div>
 </section>
 
+<!-- Choreography animation -->
 <section data-auto-animate>
   <div class="r-hstack items-center">
     <div style="width:45%;">
@@ -216,7 +218,8 @@
 <section data-auto-animate>
   <div class="r-hstack items-center">
     <div style="width:45%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+      <pre data-id="chor"><code class="hljs js" data-trim
+                                data-line-numbers>
         let x@a = crunch()
         a[x] -> b.x
         let y@b = crunch(x)
@@ -228,14 +231,14 @@
     <div style="width:45%;">
       <p>A</p>
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
-                                                          data-trim data-line-numbers>
+                                                          data-trim data-line-numbers="3">
         x = crunch()
         send("b",x)
         y = receive("b")
       </code></pre>
       <p>B</p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
-                                                          data-trim data-line-numbers>
+                                                          data-trim data-line-numbers="3">
         x = receive("a")
         y = crunch(x)
         send("a",y)
@@ -247,7 +250,7 @@
 <section data-auto-animate>
   <div class="r-hstack items-center">
     <div style="width:45%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="4">
         let x@a = crunch()
         a[x] -> b.x
         let y@b = crunch(x)
@@ -260,20 +263,26 @@
     <div style="width:45%;">
       <p>A</p>
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
-                                                          data-trim data-line-numbers>
+                                                          data-trim data-line-numbers="3">
         x = crunch()
         send("b",x)
         y = receive("b")
       </code></pre>
       <p>B</p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
-                                                          data-trim data-line-numbers>
+                                                          data-trim data-line-numbers="3">
         x = receive("a")
         y = crunch(x)
         send("a",y)
       </code></pre>
     </div>
   </div>
+</section>
+
+<!-- Syntax -->
+
+<section>
+  <p>Syntax</p>
 </section>
 
 <section>
@@ -295,6 +304,12 @@
   </table>
 </section>
 
+<!-- Semantics -->
+
+<section>
+  <p>Semantics</p>
+</section>
+
 <section>
   <h3>$(s,c) \to (s',c')$</h3>
   <div class="fragment fade-up" style="margin-top:1em">
@@ -307,6 +322,8 @@
     </ul>
   </div>
 </section>
+
+<!-- Communication rule -->
 
 <!-- <section data-auto-animate>
      <p style="text-align:left">Communication:</p>
@@ -328,16 +345,23 @@
      </table>
      </section> -->
 
-<!-- Communication rule -->
 <section>
-  <p style="text-align:left">Communication:</p>
-  <table class="rule">
-    <tbody>
-      <tr><td>$s(p,x)=d$</td><td>$p \neq q$</td></tr>
-      <tr><td colspan="2">$(s,p[x] \to q.y ; c) \xrightarrow{(\text{com p x q y},[])}  (s[(q,y) \mapsto d], c)$</td></tr>
-    </tbody>
-  </table>
+  <div class="r-vstack items-center">
+    <p>Communication</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$s(p,x)=d$</td><td>$p \neq q$</td></tr>
+        <tr><td colspan="2">
+          $(s,p[x] \to q.y ; c)
+          \xrightarrow{(\text{com p x q y},[])}
+          (s[(q,y) \to d], c)$
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
+
+<!-- Selection rule -->
 
 <!-- <section>
      <p style="text-align:left">Selection:</p>
@@ -349,34 +373,133 @@
      </table>
      </section> -->
 
-<!-- Selection rule -->
 <section>
-  <p style="text-align:left">Selection:</p>
-  <table class="rule">
-    <tbody>
-      <tr><td>$p \neq q$</td></tr>
-      <tr><td>$(s,p\langle b\rangle \to q.y ; c) \xrightarrow{(\text{Sel p b q},[])}  (s, c)$</td></tr>
-    </tbody>
-  </table>
+  <div class="r-vstack items-center">
+    <p>Selection</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$p \neq q$</td></tr>
+        <tr><td>$(s,p\langle b\rangle \to q ; c) \xrightarrow{(\text{sel p b q},[])}  (s, c)$</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <!-- Branching rule -->
-<section>
-  <p style="text-align:left">Branching:</p>
-  <table class="rule">
-    <tbody>
-      <tr><td>$s(p,v)=\top$</td></tr>
-      <tr><td>$(s, \text{If}\,a@p\,\text{Then}\,c_1\,\text{Else}\,c_2) \xrightarrow{(\text{LTau p v},[])} (s, c_1)$</td></tr>
-    </tbody>
-  </table>
-</section>
 
 <section>
-  <p>Features</p>
-  <ul>
-    <li>Swapping</li>
-    <li>Asyncrony</li>
-  </ul>
+  <div class="r-vstack items-center">
+    <p>Branching</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$s(p,v)=\top$</td></tr>
+        <tr><td>
+          $(s, \text{If}\,v@p\,\text{Then}\,c_1\,\text{Else}\,c_2)
+          \xrightarrow{(\text{LTau p v},[])}
+          (s, c_1)$
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <p>Features<span class="fragment fade-left">?</span></p>
+</section>
+
+
+<!-- Concurrency -->
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        ...
+        a[x] -> b.y
+        p[z] -> q.w
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        ...
+        a[x] -> b.y
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+        <tr><td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
+            <td>$p \notin \text{pn}(\alpha)$</td>
+            <td>$q \notin \text{pn}(\alpha)$</td></tr>
+        <tr><td colspan="3">$(s,p[x] \to q.y ; c)) \xrightarrow{(\alpha,l)} (s',p[x] \to q.y ; c')$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Asyncrony -->
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asynchrony</p>
+    <div class="fragment fade-up" style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        ...
+        a[x] -> b.y
+        q[z] -> a.w
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asynchrony</p>
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        ...
+        a[x] -> b.y
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asynchrony</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+        <tr>
+          <td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
+          <td>
+            <div class="r-vstack items-start">
+              <div>$p \in \text{pn}(\alpha)$</div>
+              <div>$q \notin \text{pn}(\alpha)$</div>
+              <div>$\text{written}(\alpha) \neq (p,x)$</div>
+            </div>
+          </td>
+        </tr>
+        <tr><td colspan="2">
+          $(s,p[x] \to q.y ; c)
+          \xrightarrow{(\alpha,\text{com p x q y}::l)}
+          (s',p[x] \to q.y ; c')$
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <section>
