@@ -289,17 +289,17 @@
   <table class="grammar">
     <tbody>
       <tr><td><code>G</code></td><td><code>::=</code></td>
-          <td><code>A[x] -> B.y; G</code></td><td>(Com)</td></tr>
+          <td><code>A[x] -> B.y; G</code></td><td>(com)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
-          <td><code>A&lt;b&gt; -> B; G</code></td><td>(Sel)</td></tr>
+          <td><code>A&lt;b&gt; -> B; G</code></td><td>(sel)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
-          <td><code><span style="color:rgb(227, 206, 171);">Let</span> x@a = foo(..); G</code></td><td>(Let)</td></tr>
+          <td><code><span keyword>Let</span> x@a = foo(..); G</code></td><td>(let)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
           <td><code><span keyword>If</span> x@a
                     <span keyword>Then</span> G
-                    <span keyword>Else</span> G</code></td><td>(If)</td></tr>
+                    <span keyword>Else</span> G</code></td><td>(if)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
-          <td><code><span keyword>End</span></code></td><td>(End)</td></tr>
+          <td><code><span keyword>End</span></code></td><td>(end)</td></tr>
     </tbody>
   </table>
 </section>
@@ -408,7 +408,6 @@
   <p>Features<span class="fragment fade-left">?</span></p>
 </section>
 
-
 <!-- Concurrency -->
 
 <section data-auto-animate>
@@ -502,29 +501,297 @@
   </div>
 </section>
 
+<!-- End point projection -->
+
 <section>
-  <p>Properties</p>
-  <ul>
-    <li>Confluence</li>
-    <li>Deadlock-freedom</li>
-  </ul>
+  <p>Projection</p>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="|1">
+        let x@a = crunch()
+        let y@b = crunch()
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+      </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="1|2">
+        let x@a = crunch()
+        let y@b = crunch()
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="2|3">
+        let x@a = crunch()
+        let y@b = crunch()
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="3|4">
+        let x@a = crunch()
+        let y@b = crunch()
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        send("b",x)
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        x = receive("a")
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="3|4">
+        let x@a = crunch()
+        let y@b = crunch()
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        send("b",x)
+        y = receive("b")
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        x = receive("a")
+        send("a",y)
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Confluence -->
+
+<section>
+  <p>Confluence</p>
 </section>
 
 <section>
-  <p>End point projection</p>
+  <div>
+    <img style="max-width: 95%;" src="Lic/confluence.png"/>
+  </div>
 </section>
 
-<section>
-  <p>Projectability</p>
-</section>
+<!-- Deadlock-freedom -->
 
 <section>
-  <p>The road to CakeML</p>
-  <ul>
-    <li>EPN</li>
-    <li>EPN payload size</li>
-    <li>EPN with encoded selection</li>
-  </ul>
+  <div class="r-vstack items-center">
+    <p>Deadlock-freedom</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+          <tr><td>
+            $\exists{s,s'.}{(s,c) \xrightarrow{\;\ast\;} (s',end)}$
+          </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- The road to CakeML -->
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:20%;">
+      <img data-id="cake" style="min-width: 65%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a2" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e1" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:40%;">
+      <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        a[x] -> b.x
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a2" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e2" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <i data-id="d1" class="fas fa-ellipsis-h"></i>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e1" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:40%;">
+      <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<!-- EPN -->
+
+<section>
+  <p>An enpoint language</p>
+</section>
+
+<!-- EPN syntax -->
+
+<section>
+  <table class="grammar">
+    <tbody>
+      <tr><td><code>EPN</code></td><td><code>::=</code></td>
+          <td><code>&lt;p,s,q,EP&gt;</code></td><td>(Single)</td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code>&lt;p,s,q,EP&gt; || EPN</code></td><td>(Parallel)</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:1em">
+    <hr/>
+    <p style="text-align:left">Where:</p>
+    <ul>
+      <li>(<code>p</code>) is a process name</li>
+      <li>(<code>s</code>) is a mappings from varible names to values
+        representing the process state,</li>
+      <li>(<code>q</code>) is a queue of unread messages</li>
+      <li>(<code>EP</code>) is the endpoint code</li>
+    </ul>
+  </div>
+</section>
+
+<!-- EP syntax -->
+
+<section>
+  <table class="grammar">
+    <tbody>
+      <tr><td><code>EP</code></td><td><code>::=</code></td>
+          <td><code><span keyword>Send</span> p x; EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>Receive</span> p y; EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>InternalChoice</span> p b; EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>ExternalChoice</span> p EP EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>Let</span> v f vl <span keyword>in</span> EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>End</span></code></td></tr>
+    </tbody>
+  </table>
 </section>
 
 

@@ -1,0 +1,99 @@
+\documentclass[tikz,22pt,convert={outfile=\jobname.svg}]{standalone}
+
+\usetikzlibrary{automata,shapes,topaths,arrows,positioning,fit,automata,backgrounds,trees}
+\usepackage{listings}
+
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.85]{beramono}%% mono
+
+\lstdefinelanguage{Chor}{
+  keywords={Com, Sel, If, Then, Else,  Set},
+  keywordstyle=\bfseries \color{red!60!black},
+  literate={{->} {{$\to$}}{2}
+  {N} {{$\mathbb{N}$}}{1}
+  {==} {{$\equiv$}}{2}
+  {|/} {{$\forall$}}{2}
+  {/|} {{$\wedge$}}{2}
+  {-/} {{$\lambda$}}{2}
+  {<|} {{$\langle$}}{2}
+  {~}  {{$\neg$}}{1}
+  {.|} {{$\bot$}}{2}
+  {|>} {{$\rangle$}}{2}
+  {[|]} {{$\blacksquare$}}{2}},
+  ndkeywords={p,q,p',q',Q,P,C,Q',P',B1,B2,S,R,T},
+  ndkeywordstyle=\color{green!40!black},
+  identifierstyle=\color{black},
+  sensitive=true,
+  basicstyle=\small\ttfamily\color{red!60!black},
+  comment=[l]{--},
+  commentstyle=\color{purple!40!black}\itshape,
+  stringstyle=\color{red}\ttfamily
+}
+
+\lstdefinestyle{style1}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  xleftmargin=\parindent,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily\color{blue},
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{black},
+  stringstyle    =\color{red},
+}
+\lstset{style=style1,escapeinside=!!}%
+
+\begin{document}
+\tikzstyle{BLOCK}=[rectangle,rounded corners,%draw=black,
+fill=green!70!black!30,thick,inner sep=10pt,minimum size=4mm]
+\tikzstyle{ARROW}=[draw=black,solid,line width=2mm,fill=black,
+preaction={-triangle 90,thin,draw,shorten >=-1mm}]
+\tikzstyle{PRED}=[rectangle,rounded corners,%draw=black,
+draw=blue!30,thick,inner sep=16pt,minimum size=4mm]
+
+\tikzstyle{CODE}=[rectangle,%draw=black,
+draw=black!80,thick,inner sep=4pt,minimum size=4mm]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{back}
+\pgfsetlayers{back,background,main}
+
+    \begin{tikzpicture}[every node/.style={node distance=0.6cm,align=center}]
+      \node[CODE] (c1) {
+        \begin{lstlisting}[language=Chor]
+P -> Q
+R -> T
+C
+        \end{lstlisting}
+      };
+      \node[CODE] (c2) [above right=0.5cm and 1.5cm of c1] {
+                \begin{lstlisting}[language=Chor]
+P -> Q
+C
+        \end{lstlisting}
+      };
+      \node[CODE] (c3) [below right=0.5cm and 1.5cm of c1] {
+        \begin{lstlisting}[language=Chor]
+R -> T
+C
+        \end{lstlisting}
+      };
+      \node[CODE] (c4) [right = 5cm of c1] {
+        \begin{lstlisting}[language=Chor]
+C
+        \end{lstlisting}
+      };
+
+
+      \path (c1 |- c2) edge[->] node[above] {$R \to T$} (c2)
+            (c1 |- c3) edge[->] node[below] {$P \to Q$} (c3)
+            (c2) edge[]         node[above] {$P \to Q$} (c2 -| c4)
+            (c3) edge[]         node[below] {$R \to T$} (c3 -| c4)
+
+            (c1) edge[] (c1 |- c2)
+            (c1) edge[] (c1 |- c3)
+            (c4) edge[<-] (c2 -| c4)
+            (c4) edge[<-] (c3 -| c4)
+            ;
+          \end{tikzpicture}
+\end{document}
