@@ -794,6 +794,110 @@
   </table>
 </section>
 
+<!-- Semantics -->
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers="1">
+        Send b x
+        ...
+      </code></pre>
+      <p class="fragment fade-up"><code>sa(x) = d</code></p>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div  style="width:45%;">
+      <p><code>&lt;b,sb,qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers="1">
+        Receive a x
+        ...
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:46%;">
+      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers>
+        ...
+      </code></pre>
+      <p><code>sa(x) = d</code></p>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:8%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div  style="width:46%;">
+      <p><code>&lt;b,sb,a,qb',<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers="1">
+        Receive a x
+        ...
+      </code></pre>
+      <p><code>qb' = (a,d)::qb</code></p>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:46%;">
+      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers>
+        ...
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:8%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div  style="width:46%;">
+      <p><code>&lt;b,sb,a,qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers="1">
+        ...
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p><code>project(p,c) = (succ,EP)</code></p>
+  <div style="margin-top:1em">
+    <hr/>
+    <p style="text-align:left">Where:</p>
+    <ul>
+      <li>(<code>p</code>) is a process name</li>
+      <li>(<code>c</code>) is a choreography</li>
+      <li>(<code>EP</code>) is a single endpoint</li>
+      <li>(<code>succ</code>) is a boolean signaling success</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
+                                                          data-trim data-line-numbers="|4-5|6-7|8-9|10">
+    Definition project_def:
+    ...
+    ∧ project proc (Com p1 v1 p2 v2 c) =
+        if proc = p1 ∧ proc = p2
+        then (F,Nil)
+        else if proc = p1
+             then Send p2 v1 <Γ> project proc c
+             else if proc = p2
+                  then Receive p1 v2 <Γ> project proc
+                  else project proc c
+    ...
+  </code></pre>
+</section>
 
 <section>
   <p>Final theorem</p>
