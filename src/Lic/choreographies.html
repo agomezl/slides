@@ -746,7 +746,7 @@
 <!-- EPN -->
 
 <section>
-  <p>An enpoint language</p>
+  <p>An endpoint language</p>
 </section>
 
 <!-- EPN syntax -->
@@ -868,6 +868,8 @@
   </div>
 </section>
 
+<!-- Projection function -->
+
 <section>
   <p><code>project(p,c) = (succ,EP)</code></p>
   <div style="margin-top:1em">
@@ -899,12 +901,149 @@
   </code></pre>
 </section>
 
+<!-- Lemmas -->
+
 <section>
-  <p>Final theorem</p>
+  <div class="r-vstack items-center">
+    <p>Semantic preservation</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$(s,c)\xrightarrow{}(s',c')$</td></tr>
+        <tr><td>$\exists{c'',s''.\;}(s',c')\rightarrow^{\ast}(s'',c'')\,\land\,
+                [\![s,c]\!]\rightarrow^{\ast}[\![s'',c'']\!]$</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <section>
-  <p>Demo</p>
+  <div class="r-vstack items-center">
+    <p>Semantic reflection</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$[\![s,c]\!]\xrightarrow{}epn$</td></tr>
+        <tr><td>$\exists{c',s'.\;}epn\rightarrow^{\ast}[\![s',c']\!]\,\land\,
+                 (s,c)\rightarrow^{\ast}(s',c')$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- IL -->
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div data-id="b1" style="padding : 10px 20px 10px 20px" class="r-vstack items-center block">
+      <div><i data-id="f1" class="far fa-file-alt"></i></div>
+      <p style="margin:0 0 0 0;">EPN</p>
+    </div>
+    <div style="width:12%;">
+      <h2><i class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:20%;">
+      <img data-id="cake" style="min-width: 65%;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div data-id="b1" style="padding : 10px 20px 10px 20px" class="r-vstack items-center block">
+      <div><i data-id="f1" class="far fa-file-alt"></i></div>
+      <p style="margin:0 0 0 0;">EPN</p>
+    </div>
+    <div style="width:12%;">
+      <h2><i class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="padding : 10px 20px 10px 20px" class="r-vstack items-center block">
+      <div><i  class="far fa-file-alt"></i></div>
+      <p style="margin:0 0 0 0;"><del>Selection</del></p>
+    </div>
+    <div style="width:12%;">
+      <h2><i class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="padding : 10px 20px 10px 20px" class="r-vstack items-center block">
+      <div><i  class="far fa-file-alt"></i></div>
+      <p style="margin:0 0 0 0;">Payload</p>
+    </div>
+    <div style="width:12%;">
+      <h2><i class="fas fa-arrow-right"></i></h2>
+    </div>
+
+    <div class="r-vstack items-start" style="width:20%;">
+      <img style="min-width: 65%;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="r-hstack items-start">
+    <div style="width:45%;" class="r-vstack items-center">
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        IntChoice b p
+        ...
+      </code></pre>
+      <h2><i class="fas fa-arrow-down"></i></h2>
+      <pre><code class="hljs haskell"
+                                                          data-trim data-line-numbers>
+        Let fv = T
+        Send p fv
+        ...
+      </code></pre>
+    </div>
+    <div class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;" class="r-vstack items-center">
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        ExternalChoice p e1 e2
+      </code></pre>
+      <h2><i class="fas fa-arrow-down"></i></h2>
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        Receive p fv
+        If fv Then e1 Else e2
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="r-hstack items-start">
+    <div style="width:45%;" class="r-vstack items-center">
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        Send p vlm
+        ...
+      </code></pre>
+      <h2><i class="fas fa-arrow-down"></i></h2>
+      <pre><code class="hljs haskell"
+                                                          data-trim data-line-numbers>
+        Send p v
+        Send p l
+        Send p m
+        ...
+      </code></pre>
+    </div>
+    <div class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;" class="r-vstack items-center">
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        Receive p vlm
+        ...
+      </code></pre>
+      <h2><i class="fas fa-arrow-down"></i></h2>
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
+        Receive p v
+        Receive p l
+        Receive p m
+        ...
+      </code></pre>
+    </div>
+  </div>
+  <div class="fragment fade-up"><i>*Wildly oversimplified</i></div>
+</section>
+
+<section>
+  <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
 </section>
 
 <section>
