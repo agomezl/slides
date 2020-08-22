@@ -3,17 +3,160 @@
   <hr/>
 </section>
 
-<section>
-  <p>The CakeML IL stack</p>
+<section data-auto-animate>
+  <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 80%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:50%;">
+      <ul>
+        <li>Functional language</li>
+        <li>Proven-correct compiler</li>
+        <li>Able to bootstrap itself</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 60%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div>
+      <h2><code>&lt;-&gt;</code></h2>
+      <p class="fragment">&#x1F91D;</p>
+    </div>
+    <div style="width:30%;" class="r-vstack items-center">
+      <div style="padding : 10px 20px 10px 20px;" class="block">
+        <div><i  class="far fa-file-alt"></i></div>
+        <p style="margin:0 0 0 0;"><code>.asm</code></p>
+      </div>
+    </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,f\!fi\,(\text{compile}\,c\,prog)\,\subseteq\\
+                 \text{extend_with_resource_limit}(\text{source_sem}\,f\!fi\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td style="border: none;">
+          $\text{extend_with_resource_limit}(\text{source_sem}\,f\!fi\,prog)$
+        </td></tr>
+        <tr><td style="border: none;">
+          <i data-id="a1" class="fas fa-arrow-down"></i>
+        </td></tr>
+        <tr><td style="border: none;">
+          $\text{source_sem}\,f\!fi\,prog\,\cup$ &#x1F4A5;
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <section>
-  <p>CakeML and running out of memory</p>
+  <p>Why do programs run out of memory?</p>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">Runs out of heap</li>
+    <li class="fragment fade-up">Runs out of stack</li>
+    <li class="fragment fade-up">Object exceeds representation limits</li>
+  </ul>
+</section>
+
+<section data-auto-animate>
+  <img style="width: 30%;" src="Lic/il.png"/>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <img style="width: 30%;" src="Lic/il.png"/>
+    <div class="r-vstack items-start" style="padding-left:20px">
+      <div>
+        <i class="fas fa-arrow-up"></i> High level
+      </div>
+      <div style="align-self:center;padding:30px 0 30px 0">
+        <code>??</code>
+      </div>
+      <div>
+        <i class="fas fa-arrow-down"></i> Low level
+      </div>
+    </div>
+  </div>
 </section>
 
 <section>
-  <p>Choosing where to put a cost semantics</p>
+  <h3><code>dataLang</code></h3>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">Imperative</li>
+    <li class="fragment fade-up">Abstract values</li>
+    <li class="fragment fade-up">Stateful storage</li>
+    <li class="fragment fade-up">An explicit call-stack</li>
+  </ul>
 </section>
+
+<section data-auto-animate>
+  <pre><code class="hljs haskell" data-trim>
+    FOLDL f e [] = e
+    FOLDL f e (x::l) = FOLDL f (f e x) l
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs python" data-trim data-line-numbers>
+    foldl [0; 1; 2] = # FOLDL (0=l) (1=e) (2=f)
+      # LENGTH l = 0?
+      do 4 :≡ (TagLenEq 0 0,[0],NONE);
+         if_var 4
+           # Nil case, return e
+           (return 1)
+           # Cons case
+           do
+             6 :≡ (ElemAt 0,[0],NONE);  # x
+             7 :≡ (ElemAt 1,[0],NONE);  # l
+             ...
+  </code></pre>
+</section>
+
+<section data-auto-animate>
+  <pre><code class="hljs haskell" data-trim>
+    FOLDL f e [] = e
+    FOLDL f e (x::l) = FOLDL f (f e x) l
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs python" data-trim data-line-numbers>
+    # Obtain f's arity
+    13 :≡ (ElemAt 1,[2],NONE);
+    # Is f's arity 2?
+    14 :≡ (EqualInt 1,[13],NONE);
+    if_var 14
+      do 15 :≡ (ElemAt 0,[2],NONE); # f location
+         # call to f
+         call (16,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
+         move 18 16
+      od
+      <|Handles partial evaluation|>
+    # Recursive call
+    tailcall_foldl [7; 18; 2]
+  </code></pre>
+</section>
+
 
 <section>
   <p>The cost semantics in <code>dataLang</code></p>

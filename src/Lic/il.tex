@@ -1,0 +1,39 @@
+\documentclass[tikz,22pt,convert={outfile=\jobname.png}]{standalone}
+
+\usetikzlibrary{shapes,topaths,arrows,positioning,fit,automata,backgrounds,calc}
+
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.85]{beramono}%% mono
+
+\definecolor{wt}{RGB}{241,242,235}
+
+\definecolor{cake}{HTML}{F19A3E}
+
+\begin{document}
+\tikzstyle{BLOCK}=[rectangle,fill=cake,
+thick,inner sep=2pt]
+\begin{tikzpicture}[every node/.style={node distance=0.1cm,align=center,
+    , minimum width=3.2cm
+  }]
+
+  \node[BLOCK] (cake)                    {\color{wt}{\footnotesize CakeML source}};
+  \node[BLOCK] (flat)  [below= of cake]  {\color{wt}{\footnotesize \texttt{flatLang}}};
+  \node[BLOCK] (pat)   [below= of flat]  {\color{wt}{\footnotesize \texttt{closLang}}};
+  \node[BLOCK] (bvl)   [below= of pat]   {\color{wt}{\footnotesize \texttt{BVL}}};
+  \node[BLOCK] (bvi)   [below= of bvl]   {\color{wt}{\footnotesize \texttt{BVI}}};
+  \node[BLOCK] (data)  [below= of bvi]   {\color{wt}{\footnotesize \texttt{dataLang}}};
+  \node[BLOCK] (word)  [below= of data]  {\color{wt}{\footnotesize \texttt{wordLang}}};
+  \node[BLOCK] (stack) [below= of word]  {\color{wt}{\footnotesize \texttt{stackLang}}};
+  \node[BLOCK] (lab)   [below= of word]  {\color{wt}{\footnotesize \texttt{labLang}}};
+  \node[BLOCK] (asm)   [below= of lab]   {\color{wt}{\footnotesize Assembly}};
+
+  \draw[fill=cake,draw=cake]
+    ($(cake.north west)+(-0.1,0.1)$) -- ($(asm.south west)+(-0.1,-0.1)$) --
+    ($(asm.south east)+(0.2,-0.1)$)   arc (360:270:0.1) --
+    ($(asm.south west)+(-0.1,-0.2)$) arc (270:180:0.1) --
+    ($(asm.south west)+(-0.2,-0.1)$)  -- ($(cake.north west)+(-0.2,-0.1)$)
+    arc (180:120:1.5cm) -- ($(cake.north east)+(-0.1,0.1)$) --
+    ($(cake.north west)+(-0.1,0.1)$);
+
+\end{tikzpicture}
+\end{document}
