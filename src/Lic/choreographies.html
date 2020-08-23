@@ -7,6 +7,20 @@
   <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 10px;">
     <h2> What is a choreography?</h2>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>It is not dancing in a group until all the problems with your system go away</li>
+      <li>But there is good analogy in the confusion </li>
+      <li>When dancing in a choreography it is the combined performance what
+          makes each individual dance routine work
+      </li>
+      <li>That is why performers practice in group, and not
+        separarately in their rooms with their individual
+        moves
+      </li>
+      <li>So, back to computer science...</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -14,13 +28,22 @@
     Choreographies are a way of describing communicating
     systems as global programs
   </blockquote>
+  <aside class="notes">
+    <ul>
+      <li>They where first introduced in the early 2000's as a way to describe web services</li>
+      <li>But they have matured to become a more general purpose approach</li>
+      <li>To create an intuition of what choreographies are, lets first consider the
+          most basic way a communicating system can be described using computer programs
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <!-- Program A & B animation -->
 <section data-auto-animate>
   <div class="r-hstack items-start">
     <div style="width:45%;">
-      <p>A</p>
+      <p>A (&#x1F57A;&#x1F3FD;)</p>
       <pre data-id="a-code"><code class="hljs python" data-trim
                                   data-line-numbers="2">
         x = crunch()
@@ -30,7 +53,7 @@
     <div style="width:10%;">
     </div>
     <div style="width:45%;">
-      <p>B</p>
+      <p>B (&#x1F57A;)</p>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers="1">
         x = receive("a")
@@ -38,6 +61,15 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>So, here we have A and B</li>
+      <li>you might think of them as two performers reading their moves alone in a room but
+          they are really just two computer programs</li>
+      <li>Here, A sends a message to B, and B receives a message from A.</li>
+      <li>Some local number crunching happens in both sides</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -62,6 +94,13 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+  <ul>
+    <li>Now, if we want to extend our interaction so that B sends to A back the values of y,
+        we can not only change B
+    </li>
+  </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -87,6 +126,11 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>We must also update A</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -117,6 +161,12 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Similarly, if we want to send a message based on a desition A makes</li>
+      <li>And here note that A is branching over the values y that it has just received from B</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -152,6 +202,14 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Again, B needs to be updated</li>
+      <li>However, here we had to be a bit creative on how B decides whether to continue or not</li>
+      <li>And it just so happens that the value of y is the same in A and B, so we can just branch on the same values</li>
+      <li>But what if this was not the case?</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -183,6 +241,17 @@
       <h2 class="fragment fade-up">?</h2>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>What if A was branching on z instead?</li>
+      <li>do we send another message?</li>
+      <li>do we compute z in B as well?</li>
+      <li>Is not a hard problem to solve, but it might get annoying</li>
+      <li>and the bigger the system becomes the more difficut it
+          becomes to keep track of all this</li>
+    </ul>
+  </aside>
+
 </section>
 
 <!-- Choreography animation -->
@@ -213,6 +282,12 @@
       </code></pre>
     </div>
   </div>
+<aside class="notes">
+  <ul>
+    <li>A choreography is a way to have all interactions in one place</li>
+    <li>The effect is the same, changing things becomes much more easy</li>
+  </ul>
+</aside>
 </section>
 
 <section data-auto-animate>
@@ -245,6 +320,12 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+  <ul>
+    <li>For example, adding a new communication between A and B</li>
+    <li>Become a simple task</li>
+  </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -277,12 +358,151 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Just adding a communication operation, which in a
+      choreography nicely combines the send and receive operations
+      of the individual processes
+      </li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        let x@a = crunch()
+        a[x] -> b.x
+        let y@b = crunch(x)
+        b[y] -> a.y
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers=>
+        ...
+        if y > 100:
+          z = crunch(y)
+          send("b",z)
+        else:
+          exit 1
+      </code></pre>
+      <p>B</p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers=>
+        ...
+        if y > 100:
+          z = receive("a")
+          ...
+        else:
+          exit 1
+      </code></pre>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>And when thing become a little more hairy</li>
+      <li>Choreography provide an strutured approach</li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="|2,3|4,9|5,6">
+        //...
+        let v@a = y > 100
+        if v@a {
+          a&lt;T&gt; -> b
+          let z@a = crunch(y)
+          a.[z] -> b.z
+          //...
+        } else {
+          a&lt;F&gt; -> b
+          //DONE
+        }
+      </code></pre>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <p>A</p>
+      <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers=>
+        ...
+        if y > 100:
+          z = crunch(y)
+          send("b",z)
+        else:
+          exit 1
+      </code></pre>
+      <p>B</p>
+      <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
+                                                          data-trim data-line-numbers=>
+        ...
+        if y > 100:
+          z = receive("a")
+          ...
+        else:
+          exit 1
+      </code></pre>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>By clearely marking where the branching decition is being made</li>
+      <li>And enforcing that all processes are on the same page about it</li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:45%;">
+      <p>(&#x1F57A;&#x1F57A;&#x1F3FD;)</p>
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
+        //...
+        let v@a = y > 100
+        if v@a {
+          a&lt;T&gt; -> b
+          let z@a = crunch(y)
+          a.[z] -> b.z
+          //...
+        } else {
+          a&lt;F&gt; -> b
+          //DONE
+        }
+      </code></pre>
+    </div>
+  </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>So you can think of a choreographyas all the performers
+          sitting in a room doing their rutines together and knowing
+          what they have to do</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- Syntax -->
 
 <section>
   <p>Syntax</p>
+  <aside class="notes">
+    <ul>
+      <li>So, lets go into more detail of how the this language looks</li>
+      <li>Specically our implentation of it, there are ofcourse a
+        number of variations around</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -302,6 +522,16 @@
           <td><code><span keyword>End</span></code></td><td>(end)</td></tr>
     </tbody>
   </table>
+  <aside class="notes">
+    <ul>
+      <li>Noting too out of the ordinary here</li>
+      <li>However, note that aside from the communication primitives
+          com and sel the language is remarkably simple</li>
+      <li>Perhaps too simple? how do I do anything other than talking to my neighbor here?</li>
+      <li>every evaluation happens inside a let, hence we use the
+          underlying implentation language to generate values</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- Semantics -->
@@ -311,7 +541,7 @@
 </section>
 
 <section>
-  <h3>$(s,c) \to (s',c')$</h3>
+  <h3>$(s,c) \xrightarrow{(\tau,l)} (s',c')$</h3>
   <div class="fragment fade-up" style="margin-top:1em">
     <hr/>
     <p style="text-align:left">Where:</p>
@@ -321,6 +551,12 @@
         variables to values</li>
     </ul>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Its a small step semantics with tagged transition and a
+          list of asyncronous operations</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- Communication rule -->
@@ -421,6 +657,11 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Deals with unrelated operations</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -462,6 +703,14 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Deals with operations a sender might perfom
+          before a communication is completed</li>
+
+    </ul>
+  </aside>
+
 </section>
 
 <section data-auto-animate>
@@ -474,6 +723,11 @@
       </code></pre>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>this is quite tricky</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -499,12 +753,32 @@
       </tbody>
     </table>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Where we are not allowed to "jump" over operations
+          involving processes as receivers because a receive
+          operation is blocking
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <!-- End point projection -->
 
 <section>
   <p>Projection</p>
+  <aside class="notes">
+    <ul>
+      <li>Previous features where to be expected, since we are
+          modeling a concurrent systems at the end of the day</li>
+
+      <li>This is perhaps the more useful feature</li>
+      <li>In a way similar to how choreographies could represent
+          individual processes</li>
+      <li>One could imagine directly generating code for individual
+          processes using a choreographies as the source
+      </li>
+    </ul>
 </section>
 
 <section data-auto-animate>
@@ -612,7 +886,7 @@
 <section data-auto-animate>
   <div class="r-vstack items-center">
     <div style="width:45%">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="3|4">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="4">
         let x@a = crunch()
         let y@b = crunch()
         a[x] -> b.x
@@ -655,6 +929,11 @@
   <div>
     <img style="max-width: 95%;" src="Lic/confluence.png"/>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>This is a must, since it relives you from worring abouth paths that might lead you into trouble</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- Deadlock-freedom -->
@@ -670,6 +949,15 @@
       </tbody>
     </table>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>The cherry on top! and the reason this
+          approach solves communication inconsistencies</li>
+      <li>There can not be a missmatch since there are
+          no individual sends and receives
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <!-- The road to CakeML -->
@@ -689,6 +977,13 @@
       <img data-id="cake" style="min-width: 65%; margin-left:20px;" src="Lic/CakeML.svg"/>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>So, we have good idea, and a nice verified compiler laying around</li>
+      <li>It only makes sence to try and use them together!</li>
+      <li>With proofs and all!</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -712,6 +1007,12 @@
       <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>The top level choreography language is perhaps too high-level to just directly translate</li>
+      <li>So, in tipical CakeML fasion we use an intermediate language!</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -741,12 +1042,24 @@
       <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Actually, we use many!!</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- EPN -->
 
 <section>
   <p>An endpoint language</p>
+  <aside class="notes">
+    <ul>
+      <li>Using concurrency jargon, an enpoint is one of the component
+      in the system or "network" that talks to other
+      component/endpoint</li>
+    </ul>
+  </aside>
 </section>
 
 <!-- EPN syntax -->
@@ -844,6 +1157,11 @@
       <p><code>qb' = (a,d)::qb</code></p>
     </div>
   </div>
+    <aside class="notes">
+    <ul>
+      <li>On receive B deques the first message from A in the queue</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -872,7 +1190,7 @@
 
 <section>
   <p><code>project(p,c) = (succ,EP)</code></p>
-  <div style="margin-top:1em">
+  <div class="fragment fade-up" style="margin-top:1em">
     <hr/>
     <p style="text-align:left">Where:</p>
     <ul>
@@ -882,6 +1200,11 @@
       <li>(<code>succ</code>) is a boolean signaling success</li>
     </ul>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Now on how to turn one thing into the other!</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -1047,15 +1370,5 @@
 </section>
 
 <section>
-  <pre><code class="hljs haskell">
-    let x@a = crunch()
-    a.x -> b.x
-    let y@b = crunch(x)
-    b.y -> a.y
-    if y > 100:
-      let z@a = crunch(y)
-      a.z -> b.z
-    else
-      -- do nothing
-  </code></pre>
+  <h3>Demo</h3>
 </section>
