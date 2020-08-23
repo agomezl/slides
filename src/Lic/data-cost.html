@@ -157,15 +157,160 @@
   </code></pre>
 </section>
 
+<section>
+  <div class="r-hstack items-center">
+       <pre><code class="hljs haskell" data-trim>
+         v = Number  int
+           | Word64  word64
+           | Block   num num (v list)
+           | CodePtr num
+           | RefPtr  num
+       </code></pre>
+  </div>
+</section>
 
 <section>
-  <p>The cost semantics in <code>dataLang</code></p>
+  <h3><code>[1,2,3]</code></h3>
+  <div class="fragment fade-up" style="margin-top:1em">
+    <hr/>
+    <pre><code class="hljs haskell" data-trim>
+      Block 8 cons_tag [Number 1;
+        Block 7 cons_tag [Number 2;
+          Block 6 cons_tag [Number 3,
+            Block 0 nil_tag []
+          ]
+        ]
+      ]
+    </code></pre>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s)</code></div>
+  <div class="fragment fade-up" style="margin-top:1em">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3|4">
+      state = <| locals           : v num_map
+               ; stack            : stack list
+               ; refs             : v ref num_map
+               ; code             : (num # prog) num_map
+               ...
+               |>
+    </code></pre>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s)</code></div>
+  <div style="margin-top:1em">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|6|7|8|9">
+      state = <| locals           : v num_map
+               ; stack            : stack list
+               ; refs             : v ref num_map
+               ; code             : (num # prog) num_map
+               ; limits           : limits
+               ; safe_for_space   : bool
+               ; peak_heap_length : num
+               ; stack_max        : num option
+               ; stack_frame_sizes : num num_map
+               ...
+               |>
+    </code></pre>
+  </div>
+</section>
+
+
+<section>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <pre><code class="hljs haskell">size_of_heap s</code></pre>
+      <ul>
+        <li class="fragment fade-right">At every allocation*</li>
+        <li class="fragment fade-right">On heap consuming operations</li>
+      </ul>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <pre><code class="hljs haskell">size_of_stack s.stack</code></pre>
+      <ul>
+        <li class="fragment fade-left">At every function call</li>
+        <li class="fragment fade-left">On stack consuming operations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div><code>size_of_stack s.stack</code></div>
+  <div style="margin-top:20px">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|1,2,6">
+        let new_stack = MAX s.stack_max
+                            (size_of_stack s.stack)
+        in
+          s with <| safe_for_space :=
+                      s.safe_for_space ∧
+                      new_stack < s.limits.stack_limit |>
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div><code>size_of_heap s</code></div>
+  <div style="margin-top:20px">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|1,5">
+        let new_heap = size_of_heap s + space_consumed s op vs
+        in
+          s with <| safe_for_space :=
+                      s.safe_for_space ∧
+                      new_heap <= s.limits.heap_limit |>
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <pre><code class="hljs haskell" data-trim>
+    data_safe s prog =
+       let (res,s') = evaluate (prog,s)
+       in s'.safe_for_space
+  </code></pre>
 </section>
 
 <section>
   <p>A word about <code>wordLang</code></p>
+  <div class="fragment fade-up">
+    <hr>
+    <div class="r-vstack items-center">
+    <pre><code class="hljs js" data-trim>
+      state_rel ds ws ∧
+      data_safe ds (to_data prog)
+      => word_safe ws (to_word prog)
+    </code></pre>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers>
+      state = <| ...
+               -- Comes from wordLang compilation face
+               ; stack_frame_sizes : num num_map
+               ...
+               |>
+    </code></pre>
+  </div>
 </section>
 
 <section>
   <p>Puting it all together</p>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td>$\dots \land \text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
+                 \text{machine_sem}\,f\!fi\,(\text{compile}\,c\,prog)=\text{source_sem}\,f\!fi\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
