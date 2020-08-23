@@ -44,6 +44,7 @@
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
     <table class="rule">
       <tbody>
         <tr><td>$\text{machine_sem}\,f\!fi\,(\text{compile}\,c\,prog)\,\subseteq\\
@@ -60,10 +61,10 @@
         <tr><td style="border: none;">
           $\text{extend_with_resource_limit}(\text{source_sem}\,f\!fi\,prog)$
         </td></tr>
-        <tr><td style="border: none;">
+        <tr class="fragment"><td style="border: none;">
           <i data-id="a1" class="fas fa-arrow-down"></i>
         </td></tr>
-        <tr><td style="border: none;">
+        <tr class="fragment"><td style="border: none;">
           $\text{source_sem}\,f\!fi\,prog\,\cup$ &#x1F4A5;
         </td></tr>
       </tbody>
@@ -123,49 +124,26 @@
     foldl [0; 1; 2] = # FOLDL (0=l) (1=e) (2=f)
       # LENGTH l = 0?
       do 4 :≡ (TagLenEq 0 0,[0],NONE);
-         if_var 4
-           # Nil case, return e
-           (return 1)
+         if_var 4 (return 1) # Nil case, return e
            # Cons case
-           do
-             6 :≡ (ElemAt 0,[0],NONE);  # x
-             7 :≡ (ElemAt 1,[0],NONE);  # l
-             ...
-  </code></pre>
-</section>
-
-<section data-auto-animate>
-  <pre><code class="hljs haskell" data-trim>
-    FOLDL f e [] = e
-    FOLDL f e (x::l) = FOLDL f (f e x) l
-  </code></pre>
-  <hr/>
-  <pre><code class="hljs python" data-trim data-line-numbers>
-    # Obtain f's arity
-    13 :≡ (ElemAt 1,[2],NONE);
-    # Is f's arity 2?
-    14 :≡ (EqualInt 1,[13],NONE);
-    if_var 14
-      do 15 :≡ (ElemAt 0,[2],NONE); # f location
-         # call to f
-         call (16,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
-         move 18 16
-      od
-      <|Handles partial evaluation|>
-    # Recursive call
-    tailcall_foldl [7; 18; 2]
+           do 6 :≡ (ElemAt 0,[0],NONE);  # x
+              7 :≡ (ElemAt 1,[0],NONE);  # l
+              ...
+              # f x e
+              call (18,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
+              tailcall_foldl [7; 18; 2]
   </code></pre>
 </section>
 
 <section>
   <div class="r-hstack items-center">
-       <pre><code class="hljs haskell" data-trim>
+      <pre><code class="hljs haskell" data-trim>
          v = Number  int
            | Word64  word64
-           | Block   num num (v list)
+           | Block   ts tag (v list)  -- ts = tag = num
            | CodePtr num
            | RefPtr  num
-       </code></pre>
+      </code></pre>
   </div>
 </section>
 
@@ -186,14 +164,13 @@
 </section>
 
 <section data-auto-animate>
-  <div data-id="t1"><code>evaluate (prog,s) = (res,s)</code></div>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
   <div class="fragment fade-up" style="margin-top:1em">
     <hr/>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3|4">
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3">
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
-               ; code             : (num # prog) num_map
                ...
                |>
     </code></pre>
@@ -201,19 +178,16 @@
 </section>
 
 <section data-auto-animate>
-  <div data-id="t1"><code>evaluate (prog,s) = (res,s)</code></div>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
   <div style="margin-top:1em">
     <hr/>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|6|7|8|9">
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|5">
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
-               ; code             : (num # prog) num_map
                ; limits           : limits
                ; safe_for_space   : bool
-               ; peak_heap_length : num
                ; stack_max        : num option
-               ; stack_frame_sizes : num num_map
                ...
                |>
     </code></pre>
@@ -226,7 +200,7 @@
     <div style="width:45%;">
       <pre><code class="hljs haskell">size_of_heap s</code></pre>
       <ul>
-        <li class="fragment fade-right">At every allocation*</li>
+        <li class="fragment fade-right">At every allocation</li>
         <li class="fragment fade-right">On heap consuming operations</li>
       </ul>
     </div>
@@ -273,6 +247,66 @@
 </section>
 
 <section>
+  <p>How do we count?</p>
+</section>
+
+<section data-auto-animate>
+  <div><code>size_of vs refs seen</code></div>
+  <div style="margin-top:1em">
+    <hr/>
+    <p style="text-align:left">Where:</p>
+      <ul>
+        <li>(<code>vs</code>) is a list of <code>v</code> values</li>
+        <li>(<code>refs</code>) is a mapping from numbers to values</li>
+        <li>(seen) is a set of timestamps we have already seen</li>
+      </ul>
+  </div>
+</section>
+
+
+<section>
+    <pre><code class="hljs haskell" data-trim data-line-numbers="3">
+      v = Number  int
+        | Word64  word64
+        | Block   ts tag (v list) -- ts = tag = num
+        | CodePtr num
+        | RefPtr  num
+    </code></pre>
+    <hr/>
+    <pre><code class="hljs haskell" data-trim>
+    Block 8 cons_tag [Number 1;
+      Block 7 cons_tag [Number 2;
+        Block 6 cons_tag [Number 3,
+          Block 0 nil_tag []
+        ]
+      ]
+    ]
+    </code></pre>
+</section>
+
+<section>
+  <pre><code class="hljs haskell" data-trim>
+    size_of [Block 3 some_tag [Number 1];
+             Block 3 some_tag [Number 1]]
+            refs seen
+  </code></pre>
+  <div>
+    <i class="fas fa-arrow-down"></i>
+  </div>
+  <pre><code class="hljs haskell" data-trim>
+    2 +
+    size_of [Block 3 some_tag [Number 1]]
+            refs ({3} ∪ seen)
+  </code></pre>
+  <div>
+    <i class="fas fa-arrow-down"></i>
+  </div>
+  <pre><code class="hljs haskell" data-trim>
+    2
+  </code></pre>
+</section>
+
+<section>
   <pre><code class="hljs haskell" data-trim>
     data_safe s prog =
        let (res,s') = evaluate (prog,s)
@@ -280,37 +314,49 @@
   </code></pre>
 </section>
 
-<section>
-  <p>A word about <code>wordLang</code></p>
-  <div class="fragment fade-up">
-    <hr>
-    <div class="r-vstack items-center">
-    <pre><code class="hljs js" data-trim>
-      state_rel ds ws ∧
-      data_safe ds (to_data prog)
-      => word_safe ws (to_word prog)
-    </code></pre>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers>
-      state = <| ...
-               -- Comes from wordLang compilation face
-               ; stack_frame_sizes : num num_map
-               ...
-               |>
-    </code></pre>
-  </div>
-</section>
+<!-- <section>
+     <p>A word about <code>wordLang</code></p>
+     <div class="fragment fade-up">
+     <hr>
+     <div class="r-vstack items-center">
+     <pre><code class="hljs js" data-trim>
+     state_rel ds ws ∧
+     data_safe ds (to_data prog)
+     => word_safe ws (to_word prog)
+     </code></pre>
+     <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers>
+     state = <| ...
+   -- Comes from wordLang compilation face
+     ; stack_frame_sizes : num num_map
+     ...
+     |>
+     </code></pre>
+     </div>
+     </section> -->
 
 <section>
   <p>Puting it all together</p>
 </section>
 
-<section data-auto-animate>
+<section>
   <div class="r-vstack items-center">
     <table class="rule">
       <tbody>
-        <tr><td>$\dots \land \text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
-                 \text{machine_sem}\,f\!fi\,(\text{compile}\,c\,prog)=\text{source_sem}\,f\!fi\,prog$</td></tr>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,c\,prog)\,\subseteq\\
+                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
   </div>
+</section>
+
+<section>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
+                 \text{machine_sem}\,(\text{compile}\,c\,prog)=\text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fragment fade-up"><i>*Wildly oversimplified</i></div>
 </section>
