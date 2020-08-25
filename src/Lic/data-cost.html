@@ -48,7 +48,7 @@
     <table class="rule">
       <tbody>
         <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
-                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
   </div>
@@ -79,7 +79,7 @@
     <table class="rule">
       <tbody>
         <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\subseteq\\
-                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
   </div>
@@ -90,8 +90,20 @@
     <p>&#x1F44D;</p>
     <table class="rule">
       <tbody>
-        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)=\\
-                 \text{source_sem}\,prog$</td></tr>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F4A1; &#x1F449; &#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\bbox[background-color: #f19a3e]{\text{is_safe}\,prog} \to \\
+          \text{machine_sem}\,(\text{compile}\,prog)=
+          \text{source_sem}\,prog$</td></tr>
       </tbody>
     </table>
   </div>
@@ -106,6 +118,11 @@
     <li class="fragment fade-up">Runs out of stack</li>
     <li class="fragment fade-up">Object exceeds representation limits</li>
   </ul>
+  <aside class="notes">j
+    <ul>
+      <li>An array which keeps track of its lenght on a header</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -117,17 +134,83 @@
     <img style="width: 30%;" src="Lic/il.png"/>
     <div class="r-vstack items-start" style="padding-left:20px">
       <div>
-        <i class="fas fa-arrow-up"></i> High level
+        <i class="fas fa-arrow-up"></i> High level (Tractable)
       </div>
       <div style="align-self:center;padding:30px 0 30px 0">
         <code>??</code>
       </div>
       <div>
-        <i class="fas fa-arrow-down"></i> Low level
+        <i class="fas fa-arrow-down"></i> Low level (Precise)
       </div>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Tracktable the higher and precise the lower</li>
+    </ul>
+  </aside>
 </section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div class="r-vstack items-center">
+      <div data-id="il1"><code>CakeML</code></div>
+      <div data-id="il2"><code>flatLang</code></div>
+      <div data-id="il3"><code>closLang</code></div>
+      <div data-id="il4"><code>BVL</code></div>
+      <div data-id="il5"><code>BVI</code></div>
+      <div data-id="il6"><code>dataLang</code></div>
+      <div data-id="il7"><code>wordLang</code></div>
+      <div data-id="il8"><code>stackLang</code></div>
+      <div data-id="il9"><code>labLang</code></div>
+      <div data-id="il10"><code>Assembly</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div class="r-vstack items-center">
+      <div style="color:#f19a3e" data-id="il1"><code>CakeML</code></div>
+      <div style="color:#f19a3e" data-id="il2"><code>flatLang</code></div>
+      <div style="color:#f19a3e" data-id="il3"><code>closLang</code></div>
+      <div style="color:#f19a3e" data-id="il4"><code>BVL</code></div>
+      <div style="color:#f19a3e" data-id="il5"><code>BVI</code></div>
+      <div style="color:#f19a3e" data-id="il6"><code>dataLang</code></div>
+      <div data-id="il7"><code>wordLang</code></div>
+      <div data-id="il8"><code>stackLang</code></div>
+      <div data-id="il9"><code>labLang</code></div>
+      <div data-id="il10"><code>Assembly</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+  <div class="r-hstack items-start">
+    <div data-id="il1"><code>CakeML</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il2"><code>flatLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il3"><code>closLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il4"><code>BVL</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il5"><code>BVI</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il6"><code>dataLang</code></div>
+  </div>
+  <div class="r-vstack items-center">
+    <div>$\subseteq$</div>
+    <div data-id="il7"><code>wordLang</code></div>
+    <div data-id="il8"><code>stackLang</code></div>
+    <div data-id="il9"><code>labLang</code></div>
+    <div data-id="il10"><code>Assembly</code></div>
+  </div>
+  </div>
+</section>
+
+
 
 <section>
   <h3><code>dataLang</code></h3>
@@ -136,40 +219,89 @@
     <li class="fragment fade-up">Imperative</li>
     <li class="fragment fade-up">Abstract values</li>
     <li class="fragment fade-up">Stateful storage</li>
-    <li class="fragment fade-up">An explicit call-stack</li>
+    <li class="fragment fade-up">An explicit call-stack
+      <span class=fragment style="color:#f19a3e;">(unlike languages above)</span></li>
   </ul>
 </section>
 
 <section data-auto-animate>
   <pre><code class="hljs haskell" data-trim>
     FOLDL f e [] = e
-    FOLDL f e (x::l) = FOLDL f (f e x) l
+    FOLDL f e (x::xs) = FOLDL f (f e x) xs
   </code></pre>
   <hr/>
-  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10-12">
+  <pre><code class="hljs python" data-trim data-line-numbers>
     foldl [0; 1; 2] = # FOLDL (0=l) (1=e) (2=f)
       # LENGTH l = 0?
       do 4 :≡ (TagLenEq 0 0,[0],NONE);
          if_var 4 (return 1) # Nil case, return e
            # Cons case
-           do 6 :≡ (ElemAt 0,[0],NONE);  # x
-              7 :≡ (ElemAt 1,[0],NONE);  # l
+           do 6 :≡ (ElemAt 0,[0],NONE);  # head
+              7 :≡ (ElemAt 1,[0],NONE);  # tail
               ...
               # f x e
               call (18,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
               tailcall_foldl [7; 18; 2]
   </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>
+        dataLang can be displayed using a monading representation
+      </li>
+      <li>
+        Funtion names are preserved as appropiately named constants
+      </li>
+      <li>
+        Varibles in data lang are numeric thus to better show the similarity
+        we replace them with a more familiar notation
+      </li>
+    </ul>
+  </aside>
 </section>
+
+<section data-auto-animate>
+  <pre><code class="hljs haskell" data-trim>
+    FOLDL f e [] = e
+    FOLDL f e (x::xs) = FOLDL f (f e x) xs
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10-12">
+    foldl [l; e; f] =
+      # LENGTH l = 0?
+      do isNil :≡ (TagLenEq 0 0,[l],NONE);
+         if_var isNil (return 1) # Nil case, return e
+           # Cons case
+           do x  :≡ (ElemAt 0,[l],NONE);  # head
+              xs :≡ (ElemAt 1,[l],NONE);  # tail
+              ...
+              # f x e
+              call (e1,⦕ f; xs ⦖) NONE [x; e; f] NONE;
+              tailcall_foldl [xs; e1; f]
+  </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>Arguments are the same, just in reverse</li>
+      <li>First a case distinction is performed</li>
+      <li>On the nil case the base value is returned </li>
+      <li>For the cons case, head and tail are obtaines
+        and the new base value is computed by calling
+        function f with the corresponding arguments
+      </li>
+      <li>Finally a tail recursive call is performed</li>
+    </ul>
+  </aside>
+</section>
+
 
 <section>
   <div class="r-hstack items-center">
-      <pre><code class="hljs haskell" data-trim>
+    <pre><code class="hljs haskell" data-trim>
          v = Number  int
            | Word64  word64
            | Block   ts tag (v list)  -- ts = tag = num
            | CodePtr num
            | RefPtr  num
-      </code></pre>
+    </code></pre>
   </div>
 </section>
 
@@ -281,25 +413,25 @@
   <div style="margin-top:1em">
     <hr/>
     <p style="text-align:left">Where:</p>
-      <ul>
-        <li>(<code>vs</code>) is a list of <code>v</code> values</li>
-        <li>(<code>refs</code>) is a mapping from numbers to values</li>
-        <li>(seen) is a set of timestamps we have already seen</li>
-      </ul>
+    <ul>
+      <li>(<code>vs</code>) is a list of <code>v</code> values</li>
+      <li>(<code>refs</code>) is a mapping from numbers to values</li>
+      <li>(seen) is a set of timestamps we have already seen</li>
+    </ul>
   </div>
 </section>
 
 
 <section>
-    <pre><code class="hljs haskell" data-trim data-line-numbers="3">
+  <pre><code class="hljs haskell" data-trim data-line-numbers="3">
       v = Number  int
         | Word64  word64
         | Block   ts tag (v list) -- ts = tag = num
         | CodePtr num
         | RefPtr  num
-    </code></pre>
-    <hr/>
-    <pre><code class="hljs haskell" data-trim>
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs haskell" data-trim>
     Block 8 cons_tag [Number 1;
       Block 7 cons_tag [Number 2;
         Block 6 cons_tag [Number 3,
@@ -307,7 +439,7 @@
         ]
       ]
     ]
-    </code></pre>
+  </code></pre>
 </section>
 
 <section>
@@ -369,7 +501,7 @@
     <table class="rule">
       <tbody>
         <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
-                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
   </div>
@@ -380,7 +512,7 @@
     <table class="rule">
       <tbody>
         <tr><td>$\text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
-                 \text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
+          \text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
       </tbody>
     </table>
   </div>
