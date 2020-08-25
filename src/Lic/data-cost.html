@@ -47,8 +47,27 @@
     <p>&#x1F91D;</p>
     <table class="rule">
       <tbody>
-        <tr><td>$\text{machine_sem}\,f\!fi\,(\text{compile}\,c\,prog)\,\subseteq\\
-                 \text{extend_with_resource_limit}(\text{source_sem}\,f\!fi\,prog)$</td></tr>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
+                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td style="border: none;">
+          $\text{extend_with_resource_limit}(\text{source_sem}\,prog)$
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          <i data-id="a1" class="fas fa-arrow-down"></i>
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          $\text{source_sem}\,prog\,\cup$ &#x1F4A5;
+        </td></tr>
       </tbody>
     </table>
   </div>
@@ -56,21 +75,28 @@
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
     <table class="rule">
       <tbody>
-        <tr><td style="border: none;">
-          $\text{extend_with_resource_limit}(\text{source_sem}\,f\!fi\,prog)$
-        </td></tr>
-        <tr class="fragment"><td style="border: none;">
-          <i data-id="a1" class="fas fa-arrow-down"></i>
-        </td></tr>
-        <tr class="fragment"><td style="border: none;">
-          $\text{source_sem}\,f\!fi\,prog\,\cup$ &#x1F4A5;
-        </td></tr>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\subseteq\\
+                 \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
   </div>
 </section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)=\\
+                 \text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 
 <section>
   <p>Why do programs run out of memory?</p>
@@ -120,7 +146,7 @@
     FOLDL f e (x::l) = FOLDL f (f e x) l
   </code></pre>
   <hr/>
-  <pre><code class="hljs python" data-trim data-line-numbers>
+  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10-12">
     foldl [0; 1; 2] = # FOLDL (0=l) (1=e) (2=f)
       # LENGTH l = 0?
       do 4 :≡ (TagLenEq 0 0,[0],NONE);
@@ -181,7 +207,7 @@
   <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
   <div style="margin-top:1em">
     <hr/>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|5">
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|5|6">
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
@@ -335,14 +361,14 @@
      </section> -->
 
 <section>
-  <p>Puting it all together</p>
+  <p>Putting it all together</p>
 </section>
 
 <section>
   <div class="r-vstack items-center">
     <table class="rule">
       <tbody>
-        <tr><td>$\text{machine_sem}\,(\text{compile}\,c\,prog)\,\subseteq\\
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
                  \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
       </tbody>
     </table>
@@ -354,7 +380,7 @@
     <table class="rule">
       <tbody>
         <tr><td>$\text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
-                 \text{machine_sem}\,(\text{compile}\,c\,prog)=\text{source_sem}\,prog$</td></tr>
+                 \text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
       </tbody>
     </table>
   </div>
