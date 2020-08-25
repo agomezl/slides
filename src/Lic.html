@@ -29,6 +29,7 @@
           <p>Alejandro Gómez-Londoño</p>
           <p>27th August 2020</p>
         </section>
+
         <!-- INTRO -->
         <section>
           <section>
@@ -37,9 +38,21 @@
           </section>
 
           <section>
-            <blockquote>
-              Communicating systems are everywhere
-            </blockquote>
+            <div class="r-vstack items-center">
+              <div class="r-hstack items-end fragment">
+                <div class="icon"><h2><i class="fas fa-plane"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-hospital"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-sms"></i></h2></div>
+              </div>
+              <blockquote>
+                Communicating systems are everywhere
+              </blockquote>
+              <div class="r-hstack items-start fragment">
+                <div class="icon"><h2><i class="fab fa-amazon"></i></h2></div>
+                <div class="icon"><h2><i class="fab fa-twitter"></i></h2></div>
+                <div class="icon"><h2><i class="fab fa-bitcoin"></i></h2></div>
+              </div>
+            </div>
             <aside class="notes">
               <ul>
                 <li>Communicating systems *based on computer programs*
@@ -52,8 +65,24 @@
           </section>
 
           <section>
-              <p>But as any other computer program they have bugs and occasionally fail</p>
-              <p style="text-align: right;" class="fragment fade-up">... bummer!</p>
+            <div class="r-vstack items-center">
+              <div class="r-hstack items-end fragment" data-fragment-index="1">
+                <div class="icon"><h2><i class="fas fa-bug"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-car-crash"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-angry"></i></h2></div>
+              </div>
+              <div>
+                <p>But as any other computer program they have bugs and occasionally fail</p>
+                <p style="text-align: right;" class="fragment fade-up" data-fragment-index="2">
+                  ... bummer!
+                </p>
+              </div>
+              <div class="r-hstack items-start fragment" data-fragment-index="1">
+                <div class="icon"><h2><i class="fas fa-dumpster-fire"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-thumbs-down"></i></h2></div>
+                <div class="icon"><h2><i class="fas fa-check"></i></h2></div>
+              </div>
+            </div>
             <aside class="notes">
               <ul>
                 <li>*title*</li>
@@ -67,29 +96,128 @@
 
           <section>
             <p>This thesis focuses on preventing two specific ways communicating systems might fail</p>
-            <div class="fragment fade-up">
-              <hr/>
-              <p/>
-              <ul>
-                <li>Component out-of-memory errors</li>
-                <li>Communication inconsistencies</li>
-              </ul>
-            </div>
           </section>
 
-          <section>
-            <p>Communication inconsistencies</p>
+          <!-- First paper (choreographies) -->
+
+          <section data-auto-animate>
+            <div class="r-vstack items-center">
+              <p>Communication deadlocks</p>
+              <hr data-id="line" style="align-self:stretch;"/>
+              <div class="r-hstack items-start fragment" style="align-self:stretch;">
+                <div style="width:45%;">
+                  <p>A</p>
+                  <pre data-id="a-code"><code class="hljs python" data-trim>
+                    receive("B",x)
+                    ...
+                  </code></pre>
+                </div>
+                <div style="width:10%;"></div>
+                <div style="width:45%;">
+                  <p>B</p>
+                  <pre data-id="b-code"><code class="hljs python" data-trim>
+                    receive("A",x)
+                    ...
+                  </code></pre>
+                </div>
+              </div>
+            </div>
             <aside class="notes">
               <ul>
-                <li>When there is a missmatch between the messages
-                components are meant to send and/or receive</li>
+                <li>They occur when for example two processes wait on eachother
+                    without neither sending the expected message first</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-auto-animate>
+            <div class="r-vstack items-center">
+              <p>Communication deadlocks</p>
+              <hr data-id="line" style="align-self:stretch;"/>
+              <div class="r-hstack items-start" style="align-self:stretch;">
+                <div style="width:45%;">
+                  <p>A</p>
+                  <pre data-id="a-code"><code class="hljs python" data-trim>
+                    ...
+                  </code></pre>
+                </div>
+                <div style="width:10%;"></div>
+                <div style="width:45%;">
+                  <p>B</p>
+                  <pre data-id="b-code"><code class="hljs python" data-trim>
+                    receive("A",x)
+                    ...
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+            <aside class="notes">
+              <ul>
+                <li>
+                  Or when a component just flat-out does not send
+                  the message another component is waiting for
+                </li>
                 <li>To address this last issues we make use of a consept call choreographies</li>
               </ul>
             </aside>
           </section>
 
-          <section>
-            <p>Component out-of-memory errors</p>
+          <section data-auto-animate>
+            <div class="r-hstack items-start">
+              <div style="width:60%;">
+                <img src="Lic/chor_paper.png"/>
+              </div>
+            </div>
+          </section>
+
+
+          <section data-auto-animate>
+            <div class="r-hstack items-start">
+              <div style="width:40%;">
+                <img src="Lic/chor_paper.png"/>
+              </div>
+              <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+                <div class="vl"></div>
+              </div>
+
+              <div style="text-align:left">
+                Contributions:
+                <hr/>
+                <div>
+                  <ul>
+                    <li>end-to-end proof of correctness</li>
+                    <li>deadlock-freedom guaranties</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- Second paper (data-cost) -->
+          <section data-auto-animate>
+            <div class="r-vstack items-center">
+              <p>out-of-memory errors</p>
+              <hr data-id="line" style="align-self:stretch;"/>
+              <div class="r-hstack items-start fragment" style="align-self:stretch;">
+                <div style="width:45%;">
+                  <p>A</p>
+                  <pre data-id="a-code"><code class="hljs python" data-trim data-line-numbers="|1">
+                    x = number_crunching()
+                    send("B",x)
+                    ...
+                  </code></pre>
+                </div>
+                <div style="width:10%;"></div>
+                <div style="width:45%;">
+                  <p>B</p>
+                  <pre data-id="b-code"><code class="hljs python" data-trim>
+                    receive("A",x)
+                    ...
+                  </code></pre>
+                </div>
+              </div>
+            </div>
             <aside class="notes">
               <ul>
                 <li>If some component fails unexpectedly changes are
@@ -98,6 +226,83 @@
               </ul>
             </aside>
           </section>
+
+          <section data-auto-animate>
+            <div class="r-vstack items-center">
+              <p>out-of-memory errors</p>
+              <hr data-id="line" style="align-self:stretch;"/>
+              <div class="r-hstack items-start" style="align-self:stretch;">
+                <div style="width:45%;">
+                  <p>A</p>
+                  <pre data-id="a-code"><code class="hljs python" data-trim data-line-numbers>
+                    x = &#x1F4A5;
+                    send("B",x)
+                    ...
+                  </code></pre>
+                </div>
+                <div style="width:10%;"></div>
+                <div style="width:45%;">
+                  <p>B</p>
+                  <pre data-id="b-code"><code class="hljs python" data-trim>
+                    receive("A",x)
+                    ...
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-auto-animate>
+            <div class="r-vstack items-center">
+              <p>out-of-memory errors</p>
+              <hr data-id="line" style="align-self:stretch;"/>
+              <div class="r-hstack items-start" style="align-self:stretch;">
+                <div style="width:45%;">
+                  <p>A</p>
+                  <h2>&#x1F4A5;</h2>
+                </div>
+                <div style="width:10%;"></div>
+                <div style="width:45%;">
+                  <p>B</p>
+                  <pre data-id="b-code"><code class="hljs python" data-trim>
+                    receive("A",x)
+                    ...
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+
+          <section data-auto-animate>
+          <div class="r-hstack items-center">
+            <div style="width:60%;">
+                <img src="Lic/cost_paper.png"/>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <div class="r-hstack items-center">
+            <div style="width:40%;">
+                <img src="Lic/cost_paper.png"/>
+            </div>
+              <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+                <div class="vl"></div>
+              </div>
+              <div style="text-align:left">
+                Contributions:
+                <hr/>
+                <ul>
+                  <li>A cost semantics</li>
+                  <li>Soundess proof</li>
+                  <li>Concrete examples</li>
+                </ul>
+              </div>
+          </div>
+        </section>
+
         </section>
 
         <!-- Cost semantics -->
