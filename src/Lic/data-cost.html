@@ -312,7 +312,7 @@
     <pre><code class="hljs haskell" data-trim>
       Block 8 cons_tag [Number 1;
         Block 7 cons_tag [Number 2;
-          Block 6 cons_tag [Number 3,
+          Block 6 cons_tag [Number 3;
             Block 0 nil_tag []
           ]
         ]
@@ -325,7 +325,7 @@
   <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
   <div class="fragment fade-up" style="margin-top:1em">
     <hr/>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3">
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3|4">
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
@@ -340,7 +340,7 @@
   <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
   <div style="margin-top:1em">
     <hr/>
-    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|5|6">
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|6|7">
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map

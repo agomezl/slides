@@ -385,3 +385,7 @@
 .reveal div.icon {
     margin: 30px 30px 30px 30px;
 }
+
+.reveal .slide-number {
+  font-size: 24pt;
+  color: #ffffff; }
