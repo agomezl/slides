@@ -1,10 +1,13 @@
-\documentclass[tikz,22pt,convert={outfile=\jobname.svg}]{standalone}
+\documentclass[tikz,22pt,convert={outfile=\jobname.png}]{standalone}
 
 \usetikzlibrary{automata,shapes,topaths,arrows,positioning,fit,automata,backgrounds,trees}
 \usepackage{listings}
 
 \usepackage[T1]{fontenc}
 \usepackage[scaled=0.85]{beramono}%% mono
+
+\definecolor{naranja}{HTML}{F19A3E}
+\definecolor{azul}{HTML}{4DA1A9}
 
 \lstdefinelanguage{Chor}{
   keywords={Com, Sel, If, Then, Else,  Set},
@@ -21,10 +24,10 @@
   {|>} {{$\rangle$}}{2}
   {[|]} {{$\blacksquare$}}{2}},
   ndkeywords={p,q,p',q',Q,P,C,Q',P',B1,B2,S,R,T},
-  ndkeywordstyle=\color{green!40!black},
+  ndkeywordstyle=\color{azul}, %\color{green!40!black},
   identifierstyle=\color{black},
   sensitive=true,
-  basicstyle=\small\ttfamily\color{red!60!black},
+  basicstyle=\small\ttfamily\color{naranja},
   comment=[l]{--},
   commentstyle=\color{purple!40!black}\itshape,
   stringstyle=\color{red}\ttfamily
@@ -52,13 +55,13 @@ preaction={-triangle 90,thin,draw,shorten >=-1mm}]
 draw=blue!30,thick,inner sep=16pt,minimum size=4mm]
 
 \tikzstyle{CODE}=[rectangle,%draw=black,
-draw=black!80,thick,inner sep=4pt,minimum size=4mm]
+draw=white,thick,inner sep=4pt,minimum size=4mm]
 
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{back}
 \pgfsetlayers{back,background,main}
 
-    \begin{tikzpicture}[every node/.style={node distance=0.6cm,align=center}]
+\begin{tikzpicture}[every node/.style={node distance=0.6cm,align=center}]
       \node[CODE] (c1) {
         \begin{lstlisting}[language=Chor]
 P -> Q
@@ -85,15 +88,15 @@ C
       };
 
 
-      \path (c1 |- c2) edge[->] node[above] {$R \to T$} (c2)
-            (c1 |- c3) edge[->] node[below] {$P \to Q$} (c3)
-            (c2) edge[]         node[above] {$P \to Q$} (c2 -| c4)
-            (c3) edge[]         node[below] {$R \to T$} (c3 -| c4)
+      \path (c1 |- c2) edge[draw=white,->] node[above] {\color{white} $R \to T$} (c2)
+            (c1 |- c3) edge[draw=white,->] node[below] {\color{white} $P \to Q$} (c3)
+            (c2) edge[draw=white]          node[above] {\color{white} $P \to Q$} (c2 -| c4)
+            (c3) edge[draw=white]          node[below] {\color{white} $R \to T$} (c3 -| c4)
 
-            (c1) edge[] (c1 |- c2)
-            (c1) edge[] (c1 |- c3)
-            (c4) edge[<-] (c2 -| c4)
-            (c4) edge[<-] (c3 -| c4)
+            (c1) edge[draw=white]    (c1 |- c2)
+            (c1) edge[draw=white]    (c1 |- c3)
+            (c4) edge[draw=white,<-] (c2 -| c4)
+            (c4) edge[draw=white,<-] (c3 -| c4)
             ;
           \end{tikzpicture}
 \end{document}
