@@ -292,7 +292,7 @@
     <div style="width:45%;">
       <pre><code class="hljs js" data-trim data-line-numbers>
         let x@A = crunch()
-        A[x] -> A.x
+        A[x] -> B.x
         let y@B = crunch(x)
       </code></pre>
     </div>
@@ -955,10 +955,10 @@
   <div class="r-vstack items-center">
     <div style="width:45%">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="|1">
-        let x@a = crunch()
-        let y@b = crunch()
-        a[x] -> b.x
-        b[y] -> a.y
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
       </div>
   </div>
@@ -970,8 +970,8 @@
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="1|2">
         let x@a = crunch()
         let y@b = crunch()
-        a[x] -> b.x
-        b[y] -> a.y
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <hr data-id="line" style="align-self:stretch"/>
@@ -991,10 +991,10 @@
   <div class="r-vstack items-center">
     <div style="width:45%">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="2|3">
-        let x@a = crunch()
-        let y@b = crunch()
-        a[x] -> b.x
-        b[y] -> a.y
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <hr data-id="line" style="align-self:stretch"/>
@@ -1023,10 +1023,10 @@
   <div class="r-vstack items-center">
     <div style="width:45%">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="3|4">
-        let x@a = crunch()
-        let y@b = crunch()
-        a[x] -> b.x
-        b[y] -> a.y
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <hr data-id="line" style="align-self:stretch"/>
@@ -1036,7 +1036,7 @@
         <pre data-id="a-code"><code class="hljs python" data-trim
                                     data-line-numbers=>
         x = crunch()
-        send("b",x)
+        send("A",x)
         </code></pre>
       </div>
       <div style="width:10%;">
@@ -1046,7 +1046,7 @@
         <pre data-id="b-code"><code class="hljs python" data-trim
                                     data-line-numbers=>
         y = crunch()
-        x = receive("a")
+        x = receive("A")
         </code></pre>
       </div>
     </div>
@@ -1059,8 +1059,8 @@
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="4">
         let x@a = crunch()
         let y@b = crunch()
-        a[x] -> b.x
-        b[y] -> a.y
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <hr data-id="line" style="align-self:stretch"/>
@@ -1070,8 +1070,8 @@
         <pre data-id="a-code"><code class="hljs python" data-trim
                                     data-line-numbers=>
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
         </code></pre>
       </div>
       <div style="width:10%;">
@@ -1081,8 +1081,8 @@
         <pre data-id="b-code"><code class="hljs python" data-trim
                                     data-line-numbers=>
         y = crunch()
-        x = receive("a")
-        send("a",y)
+        x = receive("A")
+        send("A",y)
         </code></pre>
       </div>
     </div>
@@ -1137,8 +1137,8 @@
   <div class="r-hstack items-center">
     <div style="width:30%;">
       <pre data-id="chor"><code class="hljs js" data-trim>
-        a[x] -> b.x
-        b[y] -> a.y
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -1161,8 +1161,8 @@
   <div class="r-hstack items-center">
     <div style="width:30%;">
       <pre data-id="chor"><code class="hljs js" data-trim>
-        a[x] -> b.x
-        b[y] -> a.y
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -1190,8 +1190,8 @@
   <div class="r-hstack items-center">
     <div style="width:30%;">
       <pre data-id="chor"><code class="hljs js" data-trim>
-        a[x] -> b.x
-        b[y] -> a.y
+        A[x] -> B.x
+        B[y] -> A.y
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -1273,6 +1273,9 @@
       <tr><td></td><td style="text-align:center"><code>|</code></td>
           <td><code><span keyword>Let</span> v f vl <span keyword>in</span> EP</code></td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
+          <td><code><span keyword>If</span> v <span keyword>Then</span> EP
+                     <span keyword>Else</span> EP</code></td></tr>
+      <tr><td></td><td style="text-align:center"><code>|</code></td>
           <td><code><span keyword>End</span></code></td></tr>
     </tbody>
   </table>
@@ -1283,10 +1286,10 @@
 <section data-auto-animate>
   <div class="r-hstack items-start">
     <div style="width:45%;">
-      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;A,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers="1">
-        Send b x
+        Send "B" x
         ...
       </code></pre>
       <p class="fragment fade-up"><code>sa(x) = d</code></p>
@@ -1295,10 +1298,10 @@
       <div class="vl"></div>
     </div>
     <div  style="width:45%;">
-      <p><code>&lt;b,sb,qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;B,sb,qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers="1">
-        Receive a x
+        Receive "A" x
         ...
       </code></pre>
     </div>
@@ -1308,7 +1311,7 @@
 <section data-auto-animate>
   <div class="r-hstack items-start">
     <div style="width:46%;">
-      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;A,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers>
         ...
@@ -1319,13 +1322,13 @@
       <div class="vl"></div>
     </div>
     <div  style="width:46%;">
-      <p><code>&lt;b,sb,a,qb',<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;B,sb,qb',<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers="1">
-        Receive a x
+        Receive "A" x
         ...
       </code></pre>
-      <p><code>qb' = (a,d)::qb</code></p>
+      <p><code>qb' = ("A",d)::qb</code></p>
     </div>
   </div>
     <aside class="notes">
@@ -1338,7 +1341,7 @@
 <section data-auto-animate>
   <div class="r-hstack items-start">
     <div style="width:46%;">
-      <p><code>&lt;a,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;A,sa,qa,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers>
         ...
@@ -1348,7 +1351,7 @@
       <div class="vl"></div>
     </div>
     <div  style="width:46%;">
-      <p><code>&lt;b,sb',a,qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
+      <p><code>&lt;B,sb',qb,<i style="font-size:30px" class="fas fa-arrow-down"></i>&gt;</code></p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs haskell"
                                                           data-trim data-line-numbers>
         ...
@@ -1381,7 +1384,7 @@
 
 <section>
   <pre data-id="a-code" style="margin-top:0px;"><code class="hljs haskell"
-                                                          data-trim data-line-numbers="|4-5|6-7|8-9|10">
+                                                          data-trim data-line-numbers="|3|4-5|6-7|8-9|10">
     Definition project_def:
     ...
     ∧ project proc (Com p1 v1 p2 v2 c) =
@@ -1390,7 +1393,7 @@
         else if proc = p1
              then Send p2 v1 <Γ> project proc c
              else if proc = p2
-                  then Receive p1 v2 <Γ> project proc
+                  then Receive p1 v2 <Γ> project proc c
                   else project proc c
     ...
   </code></pre>
@@ -1480,7 +1483,7 @@
       <h2><i class="fas fa-arrow-down"></i></h2>
       <pre><code class="hljs haskell"
                                                           data-trim data-line-numbers>
-        Let fv = T
+        Let fv = b
         Send p fv
         ...
       </code></pre>

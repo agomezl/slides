@@ -147,6 +147,10 @@
   <aside class="notes">
     <ul>
       <li>Tracktable the higher and precise the lower</li>
+      <li>For higher level language adding a cost semantics
+          would either be too loose or it will overcomplicate the
+          semantics with implementation details of later phases
+      </li>
     </ul>
   </aside>
 </section>
@@ -269,7 +273,7 @@
     foldl [l; e; f] =
       # LENGTH l = 0?
       do isNil :≡ (TagLenEq 0 0,[l],NONE);
-         if_var isNil (return 1) # Nil case, return e
+         if_var isNil (return e) # Nil case, return e
            # Cons case
            do x  :≡ (ElemAt 0,[l],NONE);  # head
               xs :≡ (ElemAt 1,[l],NONE);  # tail
@@ -303,6 +307,12 @@
            | RefPtr  num
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Values in dataLang are presented by this data type</li>
+    </ul>
+
+  </aside>
 </section>
 
 <section>
@@ -334,6 +344,11 @@
                |>
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Defines as functional bigstep semantics</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -353,7 +368,6 @@
     </code></pre>
   </div>
 </section>
-
 
 <section>
   <div class="r-hstack items-start">
@@ -401,7 +415,7 @@
         in
           s with <| safe_for_space :=
                       s.safe_for_space ∧
-                      new_heap <= s.limits.heap_limit |>
+                      new_heap < s.limits.heap_limit |>
     </code></pre>
   </div>
 </section>
