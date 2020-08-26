@@ -372,6 +372,16 @@
     text-align: center;
 }
 
+@counter-style fst-emoji {
+  system: cyclic;
+  symbols: "\01F947";
+  suffix: " ";
+}
+
+.reveal ul.fst-list {
+  list-style-type: fst-emoji;
+}
+
 .reveal div.icon {
     margin: 30px 30px 30px 30px;
 }
