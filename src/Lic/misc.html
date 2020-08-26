@@ -1,0 +1,62 @@
+<section>
+  <div class="r-vstack items-center">
+    <p>Communication</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$s(p,x)=d$</td><td>$p \neq q$</td></tr>
+        <tr><td colspan="2">
+          $(s,p[x] \to q.y ; c)
+          \xrightarrow{(\text{com p x q y},[])}
+          (s[(q,y) \to d], c)$
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+        <tr><td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
+            <td>$p \notin \text{pn}(\alpha)$</td>
+            <td>$q \notin \text{pn}(\alpha)$</td></tr>
+        <tr><td colspan="3">$(s,p[x] \to q.y ; c)) \xrightarrow{(\alpha,l)} (s',p[x] \to q.y ; c')$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asynchrony</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+        <tr>
+          <td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
+          <td>
+            <div class="r-vstack items-start">
+              <div>$p \in \text{pn}(\alpha)$</div>
+              <div>$q \notin \text{pn}(\alpha)$</div>
+              <div>$\text{written}(\alpha) \neq (p,x)$</div>
+            </div>
+          </td>
+        </tr>
+        <tr><td colspan="2">
+          $(s,p[x] \to q.y ; c)
+          \xrightarrow{(\alpha,\text{com p x q y}::l)}
+          (s',p[x] \to q.y ; c')$
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Where we are not allowed to "jump" over operations
+          involving processes as receivers because a receive
+          operation is blocking
+      </li>
+    </ul>
+  </aside>
+</section>

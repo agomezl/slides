@@ -56,7 +56,7 @@
       <pre data-id="a-code"><code class="hljs python" data-trim
                                   data-line-numbers="2">
         x = crunch()
-        send("b",x)
+        send("B",x)
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -68,7 +68,7 @@
       </div>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers="1">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
       </code></pre>
     </div>
@@ -93,7 +93,7 @@
       <pre data-id="a-code"><code class="hljs python" data-trim
                                   data-line-numbers="2">
         x = crunch()
-        send("b",x)
+        send("B",x)
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -106,7 +106,7 @@
                                   data-line-numbers="1,3">
         x = receive("a")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
     </div>
   </div>
@@ -128,8 +128,8 @@
       <pre data-id="a-code"><code class="hljs python"
                                   data-trim data-line-numbers="2,3">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
       </code></pre>
     </div>
     <div style="width:10%;">
@@ -140,9 +140,9 @@
       </div>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers="1,3">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
     </div>
   </div>
@@ -162,11 +162,11 @@
       <pre data-id="a-code"><code class="hljs python"
                                   data-trim data-line-numbers="4-8">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
         if y > 100:
           z = crunch(y)
-          send("b",z)
+          send("B",z)
         else:
           exit 1
       </code></pre>
@@ -179,9 +179,9 @@
       </div>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers="1,3">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
     </div>
   </div>
@@ -202,11 +202,11 @@
       <pre data-id="a-code"><code class="hljs python"
                                   data-trim data-line-numbers="4-8">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
         if y > 100:
           z = crunch(y)
-          send("b",z)
+          send("B",z)
         else:
           exit 1
       </code></pre>
@@ -219,11 +219,11 @@
       </div>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers="4-8">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
         if y > 100:
-          z = receive("a")
+          z = receive("A")
           ...
         else:
           exit 1
@@ -249,11 +249,11 @@
       <pre data-id="a-code"><code class="hljs python"
                                   data-trim data-line-numbers="4-8">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
         z = crunch(y)
         if z > 100:
-          send("b",z)
+          send("B",z)
         else:
           exit 1
       </code></pre>
@@ -266,9 +266,9 @@
       </div>
       <pre data-id="b-code"><code class="hljs python"
                                   data-trim data-line-numbers>
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
       <h2 class="fragment fade-up">?</h2>
     </div>
@@ -291,9 +291,9 @@
   <div class="r-hstack items-center">
     <div style="width:45%;">
       <pre><code class="hljs js" data-trim data-line-numbers>
-        let x@a = crunch()
-        a[x] -> b.x
-        let y@b = crunch(x)
+        let x@A = crunch()
+        A[x] -> A.x
+        let y@B = crunch(x)
       </code></pre>
     </div>
     <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
@@ -304,12 +304,12 @@
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers>
         x = crunch()
-        send("b",x)
+        send("B",x)
       </code></pre>
       <p>B</p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers>
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
       </code></pre>
     </div>
@@ -327,9 +327,9 @@
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim
                                 data-line-numbers>
-        let x@a = crunch()
-        a[x] -> b.x
-        let y@b = crunch(x)
+        let x@A = crunch()
+        A[x] -> B.x
+        let y@B = crunch(x)
       </code></pre>
     </div>
     <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
@@ -340,15 +340,15 @@
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers="3">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
       </code></pre>
       <p>B</p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers="3">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
     </div>
   </div>
@@ -364,10 +364,10 @@
   <div class="r-hstack items-center">
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="4">
-        let x@a = crunch()
-        a[x] -> b.x
-        let y@b = crunch(x)
-        b[y] -> a.y
+        let x@A = crunch()
+        A[x] -> B.x
+        let y@B = crunch(x)
+        B[y] -> A.y
       </code></pre>
     </div>
     <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
@@ -378,15 +378,15 @@
       <pre data-id="a-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers="3">
         x = crunch()
-        send("b",x)
-        y = receive("b")
+        send("B",x)
+        y = receive("B")
       </code></pre>
       <p>B</p>
       <pre data-id="b-code" style="margin-top:0px;"><code class="hljs python"
                                                           data-trim data-line-numbers="3">
-        x = receive("a")
+        x = receive("A")
         y = crunch(x)
-        send("a",y)
+        send("A",y)
       </code></pre>
     </div>
   </div>
@@ -404,10 +404,10 @@
   <div class="r-hstack items-center">
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
-        let x@a = crunch()
-        a[x] -> b.x
-        let y@b = crunch(x)
-        b[y] -> a.y
+        let x@A = crunch()
+        A[x] -> B.x
+        let y@B = crunch(x)
+        B[y] -> A.y
       </code></pre>
     </div>
     <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
@@ -420,7 +420,7 @@
         ...
         if y > 100:
           z = crunch(y)
-          send("b",z)
+          send("B",z)
         else:
           exit 1
       </code></pre>
@@ -429,7 +429,7 @@
                                                           data-trim data-line-numbers=>
         ...
         if y > 100:
-          z = receive("a")
+          z = receive("A")
           ...
         else:
           exit 1
@@ -449,14 +449,14 @@
     <div style="width:45%;">
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="|2,3|4,9|5,6">
         //...
-        let v@a = y > 100
-        if v@a {
-          a&lt;T&gt; -> b
-          let z@a = crunch(y)
-          a.[z] -> b.z
+        let v@A = y > 100
+        if v@A {
+          A&lt;T&gt; -> B
+          let z@A = crunch(y)
+          A.[z] -> B.z
           //...
         } else {
-          a&lt;F&gt; -> b
+          A&lt;F&gt; -> B
           //DONE
         }
       </code></pre>
@@ -471,7 +471,7 @@
         ...
         if y > 100:
           z = crunch(y)
-          send("b",z)
+          send("B",z)
         else:
           exit 1
       </code></pre>
@@ -480,7 +480,7 @@
                                                           data-trim data-line-numbers=>
         ...
         if y > 100:
-          z = receive("a")
+          z = receive("A")
           ...
         else:
           exit 1
@@ -505,14 +505,14 @@
       </div>
       <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
         //...
-        let v@a = y > 100
-        if v@a {
-          a&lt;T&gt; -> b
-          let z@a = crunch(y)
-          a.[z] -> b.z
+        let v@A = y > 100
+        if v@A {
+          A&lt;T&gt; -> B
+          let z@A = crunch(y)
+          A.[z] -> B.z
           //...
         } else {
-          a&lt;F&gt; -> b
+          A&lt;F&gt; -> B
           //DONE
         }
       </code></pre>
@@ -549,9 +549,9 @@
       <tr><td></td><td style="text-align:center"><code>|</code></td>
           <td><code>A&lt;b&gt; -> B; G</code></td><td>(sel)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
-          <td><code><span keyword>Let</span> x@a = foo(..); G</code></td><td>(let)</td></tr>
+          <td><code><span keyword>Let</span> x@A = foo(..); G</code></td><td>(let)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
-          <td><code><span keyword>If</span> x@a
+          <td><code><span keyword>If</span> x@A
                     <span keyword>Then</span> G
                     <span keyword>Else</span> G</code></td><td>(if)</td></tr>
       <tr><td></td><td style="text-align:center"><code>|</code></td>
@@ -597,100 +597,129 @@
 
 <!-- Communication rule -->
 
-<!-- <section data-auto-animate>
-     <p style="text-align:left">Communication:</p>
-     <table class="rule">
-     <tbody>
-     <tr data-id="i0"><td><code>s(p,x)=d</code></td><td><code>p!=q</code></td></tr>
-     <tr><td colspan="2"><code>(s,<span data-id="i1">p[x]->q.y</span>;c) ==> (<span data-id="i2">s[(q,y)|->d]</span>,c)</code></td></tr>
-     </tbody>
-     </table>
-     </section> -->
-
-<!-- <section data-auto-animate>
-     <p style="text-align:left">Communication:</p>
-     <table class="rule">
-     <tbody>
-     <tr data-id="i0"><td><code>s(p,x)=d</code></td><td><code>p!=q</code></td></tr>
-     <tr><td colspan="2"><code>(s,<span hl data-id="i1">p[x]->q.y</span>;c) ==> (<span hl data-id="i2">s[(q,y)|->d]</span>,c)</code></td></tr>
-     </tbody>
-     </table>
-     </section> -->
-
-<section>
+<section data-auto-animate>
   <div class="r-vstack items-center">
     <p>Communication</p>
-    <table class="rule">
-      <tbody>
-        <tr><td>$s(p,x)=d$</td><td>$p \neq q$</td></tr>
-        <tr><td colspan="2">
-          $(s,p[x] \to q.y ; c)
-          \xrightarrow{(\text{com p x q y},[])}
-          (s[(q,y) \to d], c)$
-        </td></tr>
-      </tbody>
-    </table>
+    <hr style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="width:80%;margin-top:20px">
+      <div data-id="c1" style="width:50%"><code>A[x] -> B.y;C</code></div>
+    </div>
   </div>
 </section>
 
-<!-- Selection rule -->
-
-<!-- <section>
-     <p style="text-align:left">Selection:</p>
-     <table class="rule">
-     <tbody>
-     <tr><td><code>p!=q</code></td></tr>
-     <tr><td><code>(s,p&lt;b&gt;->q.y</span>;c) -> (s,c)</code></td></tr>
-     </tbody>
-     </table>
-     </section> -->
-
-<section>
+<section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>Selection</p>
-    <table class="rule">
-      <tbody>
-        <tr><td>$p \neq q$</td></tr>
-        <tr><td>$(s,p\langle b\rangle \to q ; c) \xrightarrow{(\text{sel p b q},[])}  (s, c)$</td></tr>
-      </tbody>
-    </table>
+    <p>Communication</p>
+    <hr style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="width:80%;margin-top:20px">
+      <div style="width:50%"><code>S</code></div>
+      <div data-id="c1" style="width:50%"><code>A[x] -> B.y;C</code></div>
+    </div>
   </div>
 </section>
 
-<!-- Branching rule -->
-
-<section>
+<section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>Branching</p>
-    <table class="rule">
-      <tbody>
-        <tr><td>$s(p,v)=\top$</td></tr>
-        <tr><td>
-          $(s, \text{If}\,v@p\,\text{Then}\,c_1\,\text{Else}\,c_2)
-          \xrightarrow{(\text{LTau p v},[])}
-          (s, c_1)$
-        </td></tr>
-      </tbody>
-    </table>
+    <p>Communication</p>
+    <hr style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="width:80%;margin-top:20px">
+      <div style="width:50%"><code>S(A,x) = d</code></div>
+      <div data-id="c1" style="width:50%;"><code>
+        <span hl>A[x]</span> -> B.y;C</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Communication</p>
+    <hr style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="width:80%;margin-top:20px">
+      <div data-id="c1" style="width:50%;">
+        <code>
+        A[x] -> <span hl>B.y</span>;C
+        </code>
+      </div>
+      <div data-id="s1" style="width:50%"><code>S[(B,y)|->d]</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Communication</p>
+    <hr style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="width:80%;margin-top:20px">
+      <div data-id="s1" style="width:50%"><code>S[(B,y)|->d]</code></div>
+      <div data-id="c1" style="width:50%;">
+        <code>C</code>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Features -->
 <section>
-  <p>Features<span class="fragment fade-left">?</span></p>
+  <p>Features</p>
 </section>
 
+
 <!-- Concurrency -->
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+  </div>
+</section>
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
     <p>Concurrency</p>
-    <div style="width:30%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
-        ...
-        a[x] -> b.y
-        p[z] -> q.w
-      </code></pre>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div class="fragment" style="width:30%;"
+           data-fragment-index="2">
+        <pre data-id="chor"><code class="hljs js" data-trim>
+           A[x] -> B.y
+           P[z] -> Q.w
+                &#x2705;
+        </code></pre>
+      </div>
+      <div class="fragment"
+           data-fragment-index="2">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> Q.w
+              C[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="3">
+          <h2><i data-id="a1" class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="3">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+                   &#x2705;
+              C[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+      <div class="fragment"
+           data-fragment-index="1">
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div style="width:30%;" class="fragment"
+           data-fragment-index="1">
+        <pre data-id="chor"><code class="hljs js" data-trim>
+                &#x2705;
+           P[z] -> Q.w
+           C[m] -> D.k
+        </code></pre>
+      </div>
     </div>
   </div>
   <aside class="notes">
@@ -700,103 +729,208 @@
   </aside>
 </section>
 
-<section data-auto-animate>
-  <div class="r-vstack items-center">
-    <p>Concurrency</p>
-    <div style="width:30%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
-        ...
-        a[x] -> b.y
-      </code></pre>
-    </div>
-  </div>
-</section>
-
-<section data-auto-animate>
-  <div class="r-vstack items-center">
-    <p>Concurrency</p>
-    <table class="rule fragment fade-up">
-      <tbody>
-        <tr><td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
-            <td>$p \notin \text{pn}(\alpha)$</td>
-            <td>$q \notin \text{pn}(\alpha)$</td></tr>
-        <tr><td colspan="3">$(s,p[x] \to q.y ; c)) \xrightarrow{(\alpha,l)} (s',p[x] \to q.y ; c')$</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
 <!-- Asyncrony -->
-
 <section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>Asynchrony</p>
-    <div class="fragment fade-up" style="width:30%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
-        ...
-        a[x] -> b.y
-        q[z] -> a.w
-      </code></pre>
-    </div>
+    <p>Asyncrony</p>
   </div>
-  <aside class="notes">
-    <ul>
-      <li>Deals with operations a sender might perfom
-          before a communication is completed</li>
-
-    </ul>
-  </aside>
-
 </section>
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>Asynchrony</p>
-    <div style="width:30%;">
-      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers>
-        ...
-        a[x] -> b.y
-      </code></pre>
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div style="visibility:hidden">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> A.w
+              A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;visibility:hidden">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
     </div>
   </div>
-  <aside class="notes">
-    <ul>
-      <li>this is quite tricky</li>
-    </ul>
-  </aside>
 </section>
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>Asynchrony</p>
-    <table class="rule fragment fade-up">
-      <tbody>
-        <tr>
-          <td>$(s,c) \xrightarrow{(\alpha,l)} (s',c')$</td>
-          <td>
-            <div class="r-vstack items-start">
-              <div>$p \in \text{pn}(\alpha)$</div>
-              <div>$q \notin \text{pn}(\alpha)$</div>
-              <div>$\text{written}(\alpha) \neq (p,x)$</div>
-            </div>
-          </td>
-        </tr>
-        <tr><td colspan="2">
-          $(s,p[x] \to q.y ; c)
-          \xrightarrow{(\alpha,\text{com p x q y}::l)}
-          (s',p[x] \to q.y ; c')$
-        </td></tr>
-      </tbody>
-    </table>
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div style="visibility:hidden">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> A.w
+              A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;visibility:hidden">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+      </div>
+      <div>
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor_r"><code class="hljs js" data-trim>
+                &#x2705;
+           P[z] -> A.w
+           A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+    </div>
   </div>
-  <aside class="notes">
-    <ul>
-      <li>Where we are not allowed to "jump" over operations
-          involving processes as receivers because a receive
-          operation is blocking
-      </li>
-    </ul>
-  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div style="visibility:hidden">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> A.w
+              A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;visibility:hidden">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+      </div>
+      <div>
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor_r"><code class="hljs js" data-trim>
+             &#x2705; -> B.y
+           P[z] -> A.w
+           A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="1">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="1">
+          <pre><code class="hljs js" data-trim>
+             &#x2705; -> &#x2705;
+           P[z] -> A.w
+           A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div style="visibility:hidden">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> A.w
+              A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="1">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="1">
+          <pre data-id="chor_d"><code class="hljs js" data-trim>
+                &#x2705 -> B.y
+                   &#x2705;
+              A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+      <div>
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor_r"><code class="hljs js" data-trim>
+                &#x2705;
+           P[z] -> A.w
+           A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div class="fragment" style="width:30%;" data-fragment-index="1">
+        <pre data-id="chor_l"><code class="hljs js" data-trim>
+             A[x] -> B.y
+             P[z] -> A.w
+                  &#x274C;
+        </code></pre>
+      </div>
+      <div class="fragment" data-fragment-index="1">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[x] -> B.y
+              P[z] -> A.w
+              A[m] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div style="width:100%;">
+          <pre data-id="chor_d"><code class="hljs js" data-trim>
+              A[x] -> B.y
+                   &#x2705;
+              A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+      <div>
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor_r"><code class="hljs js" data-trim>
+                &#x2705;
+           P[z] -> A.w
+           A[m] -> D.k
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- End point projection -->
@@ -980,7 +1114,8 @@
     <table class="rule fragment fade-up">
       <tbody>
           <tr><td>
-            $\exists{s,s'.}{(s,c) \xrightarrow{\;\ast\;} (s',end)}$
+            $\text{fv}(c) \subseteq \text{fv}(s) \implies
+             \exists{s'.}{(s,c) \rightarrow^{\ast} (s',end)}$
           </td></tr>
       </tbody>
     </table>
@@ -1374,8 +1509,7 @@
         ...
       </code></pre>
       <h2><i class="fas fa-arrow-down"></i></h2>
-      <pre><code class="hljs haskell"
-                                                          data-trim data-line-numbers>
+      <pre><code class="hljs haskell" data-trim data-line-numbers>
         Send p v
         Send p l
         Send p m
@@ -1404,8 +1538,4 @@
 
 <section>
   <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
-</section>
-
-<section>
-  <h3>Demo</h3>
 </section>

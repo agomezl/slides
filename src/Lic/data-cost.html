@@ -98,10 +98,10 @@
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
-    <p>&#x1F4A1; &#x1F449; &#x1F44D;</p>
+    <p>&#x2705; &#x1F449; &#x1F44D;</p>
     <table class="rule">
       <tbody>
-        <tr><td>$\bbox[background-color: #f19a3e]{\text{is_safe}\,prog} \to \\
+        <tr><td>$\bbox[background-color: #f19a3e]{\text{is_safe}\,prog} \implies \\
           \text{machine_sem}\,(\text{compile}\,prog)=
           \text{source_sem}\,prog$</td></tr>
       </tbody>
@@ -329,6 +329,7 @@
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
+               ; global           : num option
                ...
                |>
     </code></pre>
@@ -343,6 +344,7 @@
       state = <| locals           : v num_map
                ; stack            : stack list
                ; refs             : v ref num_map
+               ; global           : num option
                ; limits           : limits
                ; safe_for_space   : bool
                ; stack_max        : num option
@@ -465,35 +467,45 @@
 </section>
 
 <section>
-  <pre><code class="hljs haskell" data-trim>
-    data_safe s prog =
-       let (res,s') = evaluate (prog,s)
-       in s'.safe_for_space
-  </code></pre>
+  <p>What do we count?</p>
 </section>
 
-<!-- <section>
-     <p>A word about <code>wordLang</code></p>
-     <div class="fragment fade-up">
-     <hr>
-     <div class="r-vstack items-center">
-     <pre><code class="hljs js" data-trim>
-     state_rel ds ws ∧
-     data_safe ds (to_data prog)
-     => word_safe ws (to_word prog)
-     </code></pre>
-     <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers>
-     state = <| ...
-   -- Comes from wordLang compilation face
-     ; stack_frame_sizes : num num_map
-     ...
-     |>
-     </code></pre>
-     </div>
-     </section> -->
+<section>
+  <div><code>size_of_heap s</code></div>
+  <div style="margin-top:0.3em">
+    <hr/>
+    <div class="r-vstack items-center fragment fade-up"
+         data-fragment-index="1">
+      <code>size_of <span hl>reachabe_values</span> s.refs {}</code>
+      <div class="fragment" data-fragment-index="2">
+        <h2><i class="fas fa-arrow-down"></i></h2>
+      </div>
+      <div class="fragment" style="width:80%"
+           data-fragment-index="2">
+      <pre><code class="hljs haskell" data-trim>
+       <|s.locals|> ++ <|s.stack|> ++ <|s.global|>
+      </code></pre>
+      </div>
+  </div>
+</section>
+
+<section data-auto-animate data-background="https://media.giphy.com/media/acttIrNAHaoco/giphy.gif">
+  <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px;">
+    <h3><code>size_of_heap s = <br>
+          size_of_heap (run_gc s)</code></h3>
+  </div>
+</section>
 
 <section>
   <p>Putting it all together</p>
+</section>
+
+<section>
+  <pre><code class="hljs haskell" data-trim>
+    is_safe s prog =
+       let (res,s') = evaluate (prog,s)
+       in s'.safe_for_space
+  </code></pre>
 </section>
 
 <section>
@@ -511,7 +523,7 @@
   <div class="r-vstack items-center">
     <table class="rule">
       <tbody>
-        <tr><td>$\text{data_safe}\,(\text{initial_state})\,(\text{to_data}\,prog) \to \\
+        <tr><td>$\text{is_safe}\,\text{init_s}\,(\text{to_data}\,prog) \implies \\
           \text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
       </tbody>
     </table>
