@@ -1,0 +1,559 @@
+<section style="text-align: right;">
+  <h4>Do you have space for dessert?</h4>
+  <hr/>
+  <div class="r-hstack justify-end">
+    <div>
+      <table class="authors" style="font-size: 25px;">
+        <tbody>
+          <tr><td style="text-align: right;">&#x1F5E3</td><td>Alejandro Gómez-Londoño</td></tr>
+          <tr><td></td><td>Johannes Åman Pohjola</td></tr>
+          <tr><td></td><td>Hira Taqdees Syeda</td></tr>
+          <tr><td></td><td>Magnus Myreen</td></tr>
+          <tr><td></td><td>Yong Kiam Tan</td></tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+</section>
+
+<section data-auto-animate>
+  <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 80%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:50%;">
+      <ul>
+        <li>Functional language</li>
+        <li>Proven-correct compiler</li>
+        <li>Able to bootstrap itself</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 60%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div>
+      <h2><code>&lt;-&gt;</code></h2>
+      <p class="fragment">&#x1F91D;</p>
+    </div>
+    <div style="width:30%;" class="r-vstack items-center">
+      <div style="padding : 10px 20px 10px 20px;" class="block">
+        <div><i  class="far fa-file-alt"></i></div>
+        <p style="margin:0 0 0 0;"><code>.asm</code></p>
+      </div>
+    </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td style="border: none;">
+          $\text{extend_with_resource_limit}(\text{source_sem}\,prog)$
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          <i data-id="a1" class="fas fa-arrow-down"></i>
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          $\text{source_sem}\,prog\,\cup$ &#x1F4A5;
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\subseteq\\
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x2705; &#x1F449; &#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\bbox[background-color: #f19a3e]{\text{is_safe}\,prog} \implies \\
+          \text{machine_sem}\,(\text{compile}\,prog)=
+          \text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section>
+  <p>Why do programs run out of memory?</p>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">Runs out of heap</li>
+    <li class="fragment fade-up">Runs out of stack</li>
+    <li class="fragment fade-up">Object exceeds representation limits</li>
+  </ul>
+  <aside class="notes">j
+    <ul>
+      <li>An array which keeps track of its lenght on a header</li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <img style="width: 30%;" src="Lic/il.png"/>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <img style="width: 30%;" src="Lic/il.png"/>
+    <div class="r-vstack items-start" style="padding-left:20px">
+      <div>
+        <i class="fas fa-arrow-up"></i> High level (Tractable)
+      </div>
+      <div style="align-self:center;padding:30px 0 30px 0">
+        <code>??</code>
+      </div>
+      <div>
+        <i class="fas fa-arrow-down"></i> Low level (Precise)
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Tracktable the higher and precise the lower</li>
+      <li>For higher level language adding a cost semantics
+          would either be too loose or it will overcomplicate the
+          semantics with implementation details of later phases
+      </li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div class="r-vstack items-center">
+      <div data-id="il1"><code>CakeML</code></div>
+      <div data-id="il2"><code>flatLang</code></div>
+      <div data-id="il3"><code>closLang</code></div>
+      <div data-id="il4"><code>BVL</code></div>
+      <div data-id="il5"><code>BVI</code></div>
+      <div data-id="il6"><code>dataLang</code></div>
+      <div data-id="il7"><code>wordLang</code></div>
+      <div data-id="il8"><code>stackLang</code></div>
+      <div data-id="il9"><code>labLang</code></div>
+      <div data-id="il10"><code>Assembly</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div class="r-vstack items-center">
+      <div style="color:#f19a3e" data-id="il1"><code>CakeML</code></div>
+      <div style="color:#f19a3e" data-id="il2"><code>flatLang</code></div>
+      <div style="color:#f19a3e" data-id="il3"><code>closLang</code></div>
+      <div style="color:#f19a3e" data-id="il4"><code>BVL</code></div>
+      <div style="color:#f19a3e" data-id="il5"><code>BVI</code></div>
+      <div style="color:#f19a3e" data-id="il6"><code>dataLang</code></div>
+      <div data-id="il7"><code>wordLang</code></div>
+      <div data-id="il8"><code>stackLang</code></div>
+      <div data-id="il9"><code>labLang</code></div>
+      <div data-id="il10"><code>Assembly</code></div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+  <div class="r-hstack items-start">
+    <div data-id="il1"><code>CakeML</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il2"><code>flatLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il3"><code>closLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il4"><code>BVL</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il5"><code>BVI</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il6"><code>dataLang</code></div>
+  </div>
+  <div class="r-vstack items-center">
+    <div>$\subseteq$</div>
+    <div data-id="il7"><code>wordLang</code></div>
+    <div data-id="il8"><code>stackLang</code></div>
+    <div data-id="il9"><code>labLang</code></div>
+    <div data-id="il10"><code>Assembly</code></div>
+  </div>
+  </div>
+</section>
+
+
+
+<section>
+  <h3><code>dataLang</code></h3>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">Imperative</li>
+    <li class="fragment fade-up">Abstract values</li>
+    <li class="fragment fade-up">Stateful storage</li>
+    <li class="fragment fade-up">An explicit call-stack
+      <span class=fragment style="color:#f19a3e;">(unlike languages above)</span></li>
+  </ul>
+</section>
+
+<section data-auto-animate>
+  <pre><code class="hljs haskell" data-trim>
+    FOLDL f e [] = e
+    FOLDL f e (x::xs) = FOLDL f (f e x) xs
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs python" data-trim data-line-numbers>
+    foldl [0; 1; 2] = # FOLDL (0=l) (1=e) (2=f)
+      # LENGTH l = 0?
+      do 4 :≡ (TagLenEq 0 0,[0],NONE);
+         if_var 4 (return 1) # Nil case, return e
+           # Cons case
+           do 6 :≡ (ElemAt 0,[0],NONE);  # head
+              7 :≡ (ElemAt 1,[0],NONE);  # tail
+              ...
+              # f x e
+              call (18,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
+              tailcall_foldl [7; 18; 2]
+  </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>
+        dataLang can be displayed using a monading representation
+      </li>
+      <li>
+        Funtion names are preserved as appropiately named constants
+      </li>
+      <li>
+        Varibles in data lang are numeric thus to better show the similarity
+        we replace them with a more familiar notation
+      </li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <pre><code class="hljs haskell" data-trim>
+    FOLDL f e [] = e
+    FOLDL f e (x::xs) = FOLDL f (f e x) xs
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10-12">
+    foldl [l; e; f] =
+      # LENGTH l = 0?
+      do isNil :≡ (TagLenEq 0 0,[l],NONE);
+         if_var isNil (return e) # Nil case, return e
+           # Cons case
+           do x  :≡ (ElemAt 0,[l],NONE);  # head
+              xs :≡ (ElemAt 1,[l],NONE);  # tail
+              ...
+              # f x e
+              call (e1,⦕ f; xs ⦖) NONE [x; e; f] NONE;
+              tailcall_foldl [xs; e1; f]
+  </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>Arguments are the same, just in reverse</li>
+      <li>First a case distinction is performed</li>
+      <li>On the nil case the base value is returned </li>
+      <li>For the cons case, head and tail are obtaines
+        and the new base value is computed by calling
+        function f with the corresponding arguments
+      </li>
+      <li>Finally a tail recursive call is performed</li>
+    </ul>
+  </aside>
+</section>
+
+
+<section>
+  <div class="r-hstack items-center">
+    <pre><code class="hljs haskell" data-trim>
+         v = Number  int
+           | Word64  word64
+           | Block   ts tag (v list)  -- ts = tag = num
+           | CodePtr num
+           | RefPtr  num
+    </code></pre>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Values in dataLang are presented by this data type</li>
+    </ul>
+
+  </aside>
+</section>
+
+<section>
+  <h3><code>[1,2,3]</code></h3>
+  <div class="fragment fade-up" style="margin-top:1em">
+    <hr/>
+    <pre><code class="hljs haskell" data-trim>
+      Block 8 cons_tag [Number 1;
+        Block 7 cons_tag [Number 2;
+          Block 6 cons_tag [Number 3;
+            Block 0 nil_tag []
+          ]
+        ]
+      ]
+    </code></pre>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
+  <div class="fragment fade-up" style="margin-top:1em">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|1|2|3|4">
+      state = <| locals           : v num_map
+               ; stack            : stack list
+               ; refs             : v ref num_map
+               ; global           : num option
+               ...
+               |>
+    </code></pre>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Defines as functional bigstep semantics</li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div data-id="t1"><code>evaluate (prog,s) = (res,s')</code></div>
+  <div style="margin-top:1em">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|6|7">
+      state = <| locals           : v num_map
+               ; stack            : stack list
+               ; refs             : v ref num_map
+               ; global           : num option
+               ; limits           : limits
+               ; safe_for_space   : bool
+               ; stack_max        : num option
+               ...
+               |>
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="r-hstack items-start">
+    <div style="width:45%;">
+      <pre><code class="hljs haskell">size_of_heap s</code></pre>
+      <ul>
+        <li class="fragment fade-right">At every allocation</li>
+        <li class="fragment fade-right">On heap consuming operations</li>
+      </ul>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:45%;">
+      <pre><code class="hljs haskell">size_of_stack s.stack</code></pre>
+      <ul>
+        <li class="fragment fade-left">At every function call</li>
+        <li class="fragment fade-left">On stack consuming operations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div><code>size_of_stack s.stack</code></div>
+  <div style="margin-top:20px">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|5|1,2,6">
+        let new_stack = MAX s.stack_max
+                            (size_of_stack s.stack)
+        in
+          s with <| safe_for_space :=
+                      s.safe_for_space ∧
+                      new_stack < s.limits.stack_limit |>
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <div><code>size_of_heap s</code></div>
+  <div style="margin-top:20px">
+    <hr/>
+    <pre data-id="c1"><code class="hljs haskell" data-trim data-line-numbers="|4|1,5">
+        let new_heap = size_of_heap s + space_consumed s op vs
+        in
+          s with <| safe_for_space :=
+                      s.safe_for_space ∧
+                      new_heap < s.limits.heap_limit |>
+    </code></pre>
+  </div>
+</section>
+
+<section>
+  <p>How do we count?</p>
+</section>
+
+<section data-auto-animate>
+  <div><code>size_of vs refs seen</code></div>
+  <div style="margin-top:1em">
+    <hr/>
+    <p style="text-align:left">Where:</p>
+    <ul>
+      <li>(<code>vs</code>) is a list of <code>v</code> values</li>
+      <li>(<code>refs</code>) is a mapping from numbers to values</li>
+      <li>(seen) is a set of timestamps we have already seen</li>
+    </ul>
+  </div>
+</section>
+
+
+<section>
+  <pre><code class="hljs haskell" data-trim data-line-numbers="3">
+      v = Number  int
+        | Word64  word64
+        | Block   ts tag (v list) -- ts = tag = num
+        | CodePtr num
+        | RefPtr  num
+  </code></pre>
+  <hr/>
+  <pre><code class="hljs haskell" data-trim>
+    Block 8 cons_tag [Number 1;
+      Block 7 cons_tag [Number 2;
+        Block 6 cons_tag [Number 3,
+          Block 0 nil_tag []
+        ]
+      ]
+    ]
+  </code></pre>
+</section>
+
+<section>
+  <pre><code class="hljs haskell" data-trim>
+    size_of [Block 3 some_tag [Number 1];
+             Block 3 some_tag [Number 1]]
+            refs seen
+  </code></pre>
+  <div>
+    <i class="fas fa-arrow-down"></i>
+  </div>
+  <pre><code class="hljs haskell" data-trim>
+    2 +
+    size_of [Block 3 some_tag [Number 1]]
+            refs ({3} ∪ seen)
+  </code></pre>
+  <div>
+    <i class="fas fa-arrow-down"></i>
+  </div>
+  <pre><code class="hljs haskell" data-trim>
+    2
+  </code></pre>
+</section>
+
+<section>
+  <p>What do we count?</p>
+</section>
+
+<section>
+  <div><code>size_of_heap s</code></div>
+  <div style="margin-top:0.3em">
+    <hr/>
+    <div class="r-vstack items-center fragment fade-up"
+         data-fragment-index="1">
+      <code>size_of <span hl>reachabe_values</span> s.refs {}</code>
+      <div class="fragment" data-fragment-index="2">
+        <h2><i class="fas fa-arrow-down"></i></h2>
+      </div>
+      <div class="fragment" style="width:80%"
+           data-fragment-index="2">
+      <pre><code class="hljs haskell" data-trim>
+       <|s.locals|> ++ <|s.stack|> ++ <|s.global|>
+      </code></pre>
+      </div>
+  </div>
+</section>
+
+<section data-auto-animate data-background="https://media.giphy.com/media/acttIrNAHaoco/giphy.gif">
+  <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px;">
+    <h3><code>size_of_heap s = <br>
+          size_of_heap (run_gc s)</code></h3>
+  </div>
+</section>
+
+<section>
+  <p>Putting it all together</p>
+</section>
+
+<section>
+  <pre><code class="hljs haskell" data-trim>
+    is_safe s prog =
+       let (res,s') = evaluate (prog,s)
+       in s'.safe_for_space
+  </code></pre>
+</section>
+
+<section>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{is_safe}\,\text{init_s}\,(\text{to_data}\,prog) \implies \\
+          \text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fragment fade-up"><i>*Wildly oversimplified</i></div>
+</section>
