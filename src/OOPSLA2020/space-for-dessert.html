@@ -132,6 +132,15 @@
   </div>
 </section>
 
+<section>
+  <p>Objectives</p>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">Make space reasoning <u>possible</u> in <code>CakeML</code></li>
+    <li class="fragment fade-up">Produce <u>concrete and tight</u> space bounds</li>
+    <li class="fragment fade-up">Translate <u>liveness</u> properties from source to machine code</li>
+  </ul>
+</section>
 
 <section>
   <p>Why do programs run out of memory?</p>
@@ -141,7 +150,7 @@
     <li class="fragment fade-up">Runs out of stack</li>
     <li class="fragment fade-up">Object exceeds representation limits</li>
   </ul>
-  <aside class="notes">j
+  <aside class="notes">
     <ul>
       <li>An array which keeps track of its lenght on a header</li>
     </ul>
@@ -237,19 +246,56 @@
   </div>
 </section>
 
-<section>
-  <h3>Our goals</h3>
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div data-id="il1"><code>CakeML</code></div>
+  </div>
   <hr/>
-  <ul>
-    <li>Be able to translate liveness properties from source to machine code</li>
-    <li>Produce concrete and tight space bounds</li>
-    <li>Down to earth </li>
-  </ul>
-
+  <div class="r-hstack items-start">
+    <div style="width : 50%;">
+    <ul class="up-list">
+      <li>Source language</li>
+      <li>High level</li>
+    </ul>
+    </div>
+    <div style="width : 50%;">
+    <ul class="down-list">
+      <li>Optimizations</li>
+      <li>Abstract values</li>
+    </ul>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h3><code>dataLang</code></h3>
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+  <div class="r-hstack items-start">
+    <div data-id="il1"><code>CakeML</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il2"><code>flatLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il3"><code>closLang</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il4"><code>BVL</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il5"><code>BVI</code></div>
+    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="il6"><code>dataLang</code></div>
+  </div>
+  <div class="r-vstack items-center">
+    <div>$\subseteq$</div>
+    <div data-id="il7"><code>wordLang</code></div>
+    <div data-id="il8"><code>stackLang</code></div>
+    <div data-id="il9"><code>labLang</code></div>
+    <div data-id="il10"><code>Assembly</code></div>
+  </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div data-id="il6"><code>dataLang</code></div>
+  </div>
   <hr/>
   <ul>
     <li class="fragment fade-up">Imperative</li>

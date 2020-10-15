@@ -381,9 +381,31 @@
   suffix: " ";
 }
 
+@counter-style up-emoji {
+  system: cyclic;
+  symbols: "\01F44D";
+  suffix: " ";
+}
+
+@counter-style down-emoji {
+  system: cyclic;
+  symbols: "\01F44E";
+  suffix: " ";
+}
+
+
 .reveal ul.fst-list {
   list-style-type: fst-emoji;
 }
+
+.reveal ul.up-list {
+  list-style-type: up-emoji;
+}
+
+.reveal ul.down-list {
+  list-style-type: down-emoji;
+}
+
 
 .reveal div.icon {
     margin: 30px 30px 30px 30px;
