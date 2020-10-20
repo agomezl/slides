@@ -4,7 +4,7 @@
   <div class="r-hstack justify-start">
     <div class="r-hstack justify-center" style="align-self: stretch;width: 50%;">
       <div>
-        <p>A Verified Space Cost Semantics for <img style="vertical-align:middle;margin:0;" height="42px" src="Lic/CakeML.svg"/></p>
+        <p>A Verified Space Cost Semantics for <img style="vertical-align:middle;margin:0;" height="42px" src="Lic/CakeML.svg"/> CakeML</p>
       </div>
       <div>
 
@@ -17,7 +17,7 @@
             <tr><td style="text-align: right;">&#x1F5E3</td><td>Alejandro Gómez-Londoño</td></tr>
             <tr><td></td><td>Johannes Åman Pohjola</td></tr>
             <tr><td></td><td>Hira Taqdees Syeda</td></tr>
-            <tr><td></td><td>Magnus Myreen</td></tr>
+            <tr><td></td><td>Magnus O. Myreen</td></tr>
             <tr><td></td><td>Yong Kiam Tan</td></tr>
           </tbody>
         </table>
@@ -138,9 +138,20 @@
   <ul>
     <li class="fragment fade-up">Make space reasoning <u>possible</u> in <code>CakeML</code></li>
     <li class="fragment fade-up">Produce <u>concrete and tight</u> space bounds</li>
-    <li class="fragment fade-up">Translate <u>liveness</u> properties from source to machine code</li>
+    <li class="fragment fade-up">Enable transportation of <u>liveness</u> properties from source to machine code</li>
   </ul>
 </section>
+
+<section>
+  <p>Contributions</p>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">A formal <u>space cost semantics</u> for <img style="vertical-align:middle;margin:0;" height="42px" src="Lic/CakeML.svg"/> CakeML</li>
+    <li class="fragment fade-up">Proof of <u>soundness</u> w.r.t a compiler that relies on (verified) garbage collection</li>
+    <li class="fragment fade-up">Prove of <u>concrete and tight bounds</u> for a number of examples (non-terminating, higher-order, and bignum)</li>
+  </ul>
+  </section>
+
 
 <section>
   <p>Why do programs run out of memory?</p>
@@ -199,7 +210,7 @@
       <div data-id="il7"><code>wordLang</code></div>
       <div data-id="il8"><code>stackLang</code></div>
       <div data-id="il9"><code>labLang</code></div>
-      <div data-id="il10"><code>Assembly</code></div>
+      <div data-id="il10"><code>Machine code</code></div>
     </div>
   </div>
 </section>
@@ -216,7 +227,7 @@
       <div data-id="il7"><code>wordLang</code></div>
       <div data-id="il8"><code>stackLang</code></div>
       <div data-id="il9"><code>labLang</code></div>
-      <div data-id="il10"><code>Assembly</code></div>
+      <div data-id="il10"><code>Machine code</code></div>
     </div>
   </div>
 </section>
@@ -241,7 +252,7 @@
     <div data-id="il7"><code>wordLang</code></div>
     <div data-id="il8"><code>stackLang</code></div>
     <div data-id="il9"><code>labLang</code></div>
-    <div data-id="il10"><code>Assembly</code></div>
+    <div data-id="il10"><code>Machine code</code></div>
   </div>
   </div>
 </section>
@@ -287,7 +298,7 @@
     <div data-id="il7"><code>wordLang</code></div>
     <div data-id="il8"><code>stackLang</code></div>
     <div data-id="il9"><code>labLang</code></div>
-    <div data-id="il10"><code>Assembly</code></div>
+    <div data-id="il10"><code>Machine code</code></div>
   </div>
   </div>
 </section>
@@ -503,12 +514,12 @@
 </section>
 
 <section data-auto-animate>
-  <div><code>size_of vs refs seen</code></div>
+  <div><code>size_of vals refs seen</code></div>
   <div style="margin-top:1em">
     <hr/>
     <p style="text-align:left">Where:</p>
     <ul>
-      <li>(<code>vs</code>) is a list of <code>v</code> values</li>
+      <li>(<code>vals</code>) is a list of <code>v</code> values</li>
       <li>(<code>refs</code>) is a mapping from numbers to values</li>
       <li>(seen) is a set of timestamps we have already seen</li>
     </ul>
@@ -620,5 +631,20 @@
       </tbody>
     </table>
   </div>
-  <div class="fragment fade-up"><i>*Wildly oversimplified</i></div>
+  <div class="fragment fade-up"><i>(See paper for actual statement.)</i></div>
+</section>
+
+<section>
+  <p>Conclusion</p>
+  <hr/>
+  <ul>
+    <li class="fragment fade-up">We use <code>dataLang</code> as a space cost semantics for <img style="vertical-align:middle;margin:0;" height="42px" src="Lic/CakeML.svg"/></li>
+    <li class="fragment fade-up">Space cost is precisely measured by <code>size_of</code></li>
+    <li class="fragment fade-up">Timestamps are used to mitigate aliasing</li>
+    <li class="fragment fade-up">By only counting reachable objects our measurement is idempotent over GC passes</li>
+  </ul>
+  </section>
+
+<section>
+  <h1><img style="vertical-align:middle;margin:0;" src="Lic/CakeML.svg"/></li>?</h1>
 </section>

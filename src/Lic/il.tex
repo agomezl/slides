@@ -25,7 +25,7 @@ thick,inner sep=2pt]
   \node[BLOCK] (word)  [below= of data]  {\color{wt}{\footnotesize \texttt{wordLang}}};
   \node[BLOCK] (stack) [below= of word]  {\color{wt}{\footnotesize \texttt{stackLang}}};
   \node[BLOCK] (lab)   [below= of stack] {\color{wt}{\footnotesize \texttt{labLang}}};
-  \node[BLOCK] (asm)   [below= of lab]   {\color{wt}{\footnotesize Assembly}};
+  \node[BLOCK] (asm)   [below= of lab]   {\color{wt}{\footnotesize Machine code}};
 
   \draw[fill=cake,draw=cake]
     ($(cake.north west)+(-0.1,0.1)$) -- ($(asm.south west)+(-0.1,-0.1)$) --
