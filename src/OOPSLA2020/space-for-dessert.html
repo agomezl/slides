@@ -24,10 +24,23 @@
       </div>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Hello</li>
+      <li>My name is Alejandro Gomez-Londoño</li>
+      <li>And I'm presenting our work in space cost semantics for CakeML programs</li>
+      <li>Titled: "Do you have space for dessert?"</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
   <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
+  <aside class="notes">
+    <ul>
+      <li>First, lets discuss what is CakeML</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -46,6 +59,12 @@
       </ul>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>CakeML is ...</li>
+    </ul>
+
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -63,6 +82,12 @@
         <p style="margin:0 0 0 0;"><code>.asm</code></p>
       </div>
     </div>
+    <aside class="notes">
+      <p> So, using the CakeML compiler one can generate
+          from a source program (left)  machine code (right)
+          and be sure that the behaviours of both are compatible.
+      </p>
+    </aside>
 </section>
 
 <section data-auto-animate>
@@ -75,6 +100,21 @@
       </tbody>
     </table>
   </div>
+  <aside class="notes">
+   <ul>
+     <li>
+       What we mean by compatible in this setting is that all the behaviours
+       present in the semantics of the machine code are also present (left)
+       in the semantics of the source code (right)
+     </li>
+     <li>
+       Or in other words, the behaviours of the source code are a super
+       set of those of the machine code
+     </li>
+     <li>This allows us to translate safety properties from one side to the other</li>
+     <li>However ther is catch!</li>
+   </ul>
+  </aside>
 </section>
 
 
@@ -94,6 +134,17 @@
       </tbody>
     </table>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>You might have notice that the source sematics is enclosend in this
+          <code>extended_with_resorce_limits</code> function
+      </li>
+      <li>What this does is that it takes all the behaviours of the source semantics
+          and extends them with running out of memory behaviours
+        </li>
+        <li>We need this because the source semantics can not run out of memory</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -106,6 +157,12 @@
       </tbody>
     </table>
   </div>
+<aside class="notes">
+  <ul>
+    <li>So we would like to replace the subset relation with an equality!</li>
+  </ul>
+
+</aside>
 </section>
 
 <section data-auto-animate>
@@ -130,6 +187,12 @@
       </tbody>
     </table>
   </div>
+<aside class="notes">
+  <p>The approach we tooks was to device a predicate over the source program
+      that ensures a compile program is safe and will not run out of memory, which
+      eliminates the need for <code>extend_with_resource_limit</code>
+  </p>
+</aside>
 </section>
 
 <section>
@@ -163,6 +226,8 @@
   </ul>
   <aside class="notes">
     <ul>
+      <li>One or more objects sizes grow to big and exhausting the heap</li>
+      <li>Too many nested function calls fill the stack completely</li>
       <li>An array which keeps track of its lenght on a header</li>
     </ul>
   </aside>
@@ -170,6 +235,13 @@
 
 <section data-auto-animate>
   <img style="width: 30%;" src="Lic/il.png"/>
+  <aside class="notes">
+    <ul>
+      <li>So where do out-memory-errors appear in CakeML?</li>
+      <li>the structure of CakeML, unsurprisingly,
+          looks like a cake, in the sense that it has many layers</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -265,17 +337,29 @@
   <div class="r-hstack items-start">
     <div style="width : 50%;">
     <ul class="up-list">
-      <li>Source language</li>
-      <li>High level</li>
+      <li class="fragment fade-up">Source language</li>
+      <li class="fragment fade-up">High level</li>
     </ul>
     </div>
     <div style="width : 50%;">
     <ul class="down-list">
-      <li>Complex cost-semantics</li>
-      <li>Loose approximation</li>
+      <li class="fragment fade-up">Complex cost-semantics</li>
+      <li class="fragment fade-up">Loose approximation</li>
     </ul>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>The initially great upsides very quicky turned into downsides</li>
+      <li>Extending the source semantics to accomodate a space reasoning either:
+        <ul>
+          <li>Make the semantics too comples by embeding all compilers phases and optimizations on it</li>
+          <li>Or Completely ignore all that and be too loose</li>
+        </ul>
+      </li>
+      <li>Both of those alternatives did not met our objectives so we went back to the drawing board</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -301,6 +385,12 @@
     <div data-id="il10"><code>Machine code</code></div>
   </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>We notes that among all the "high level" languages <code>dataLang</code>
+          had a number of interesting features</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -315,6 +405,15 @@
     <li class="fragment fade-up">An explicit call-stack
       <span class=fragment style="color:#f19a3e;">(unlike languages above)</span></li>
   </ul>
+  <aside class="notes">
+    <ul>
+      <li>By abstract values we mean not using words for everything</li>
+      <li>So pretty much everything we need to be able to
+          talk about running out of memory is here in a concrete enough way</li>
+      <li>Bonus point, most of the optimizations have already happened by
+          this point on the compilations so there is no need to accomodate for that</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -338,6 +437,15 @@
   </code></pre>
   <aside class="notes">
     <ul>
+      <li>
+        However, <code>dataLang</code> is NOT source CakeML and there
+        is of course a quite clear downside to write your programs on language and
+        have to reason about them in another.
+      </li>
+      <li>
+        But we have improved our infrastructure to facilitate this task,
+        and to in our experience things don't look so bad down there!
+      </li>
       <li>
         dataLang can be displayed using a monading representation
       </li>
@@ -456,6 +564,12 @@
                |>
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>So we have everything we need to measure and keep track of memory, how do we do it then?</li>
+    </ul>
+
+  </aside>
 </section>
 
 <section>
@@ -521,7 +635,7 @@
     <ul>
       <li>(<code>vals</code>) is a list of <code>v</code> values</li>
       <li>(<code>refs</code>) is a mapping from numbers to values</li>
-      <li>(seen) is a set of timestamps we have already seen</li>
+      <li>(<code>seen</code>) timestamps we have already seen</li>
     </ul>
   </div>
 </section>
