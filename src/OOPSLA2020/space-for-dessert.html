@@ -829,7 +829,7 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>We measure using the function <code>size_of</code></li>
+      <li>We measure values using the function <code>size_of</code></li>
       <li>It takes as arguments</li>
       <ul>
         <li>A list of values</li>
@@ -907,6 +907,16 @@
 </section>
 
 <section>
+  <div><code>size_of_stack s.stack</code></div>
+  <div style="margin-top:1em">
+    <hr/>
+  </div>
+  <aside class="notes">
+    <p>To measure the size of the stack, we traverse it counting the size of all stack frame</p>
+  </aside>
+</section>
+
+<section>
   <p>What do we count?</p>
 </section>
 
@@ -927,6 +937,12 @@
       </code></pre>
       </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li><code>size_of_heap</code> is implemented as a call to <code>size_of</code> with a list of all reachabe values</li>
+      <li>which are obtained from traversing all values in the locals, the stack, and the global references</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate data-background="https://media.giphy.com/media/acttIrNAHaoco/giphy.gif">
@@ -934,6 +950,11 @@
     <h3><code>size_of_heap s = <br>
           size_of_heap (run_gc s)</code></h3>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>A very nice side effect of this is that our measurement of heap size is idenpotent w.r.t a garbage collection</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -946,17 +967,14 @@
        let (res,s') = evaluate (prog,s)
        in s'.safe_for_space
   </code></pre>
-</section>
-
-<section>
-  <div class="r-vstack items-center">
-    <table class="rule">
-      <tbody>
-        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
-          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <aside>
+    <ul>
+      <li>Our safety predicate is then defined in terms of the evaluation of a dataLang program</li>
+      <li>we say that a source program is safe if the evaluation of its dataLang representation
+          is <code>safe_for_space</code>
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -969,6 +987,13 @@
     </table>
   </div>
   <div class="fragment fade-up"><i>(See paper for actual statement.)</i></div>
+  <aside>
+    <ul>
+      <li>We have proven that if a program <code>is_safe</code> no out-of-memory behaviours can occur in the machine code</li>
+      <li>Which implies that the relation between source and machine code can be proven to be an equality</li>
+      <li>All proofs where formalized using the HOL4 theorem prover in the context of the CakeML project</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
