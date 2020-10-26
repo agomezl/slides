@@ -141,8 +141,8 @@
       </li>
       <li>What this does is that it takes all the behaviours of the source semantics
           and extends them with running out of memory behaviours
-        </li>
-        <li>We need this because the source semantics can not run out of memory</li>
+      </li>
+      <li>We need this because the source semantics can not run out of memory</li>
     </ul>
   </aside>
 </section>
@@ -174,6 +174,13 @@
       </tbody>
     </table>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>This will allow us to not only translate safety but liveness
+          properties from one side to the other
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -188,10 +195,12 @@
     </table>
   </div>
 <aside class="notes">
-  <p>The approach we tooks was to device a predicate over the source program
-      that ensures a compile program is safe and will not run out of memory, which
-      eliminates the need for <code>extend_with_resource_limit</code>
-  </p>
+  <ul>
+  <li>The approach we tooks was to device a  "safety" predicate over the source program
+      which ensures that when compiled the resulting machine code will not run out of memory
+  </li>
+  <li>This eliminates the need for <code>extend_with_resource_limit</code></li>
+</ul>
 </aside>
 </section>
 
@@ -203,6 +212,11 @@
     <li class="fragment fade-up">Produce <u>concrete and tight</u> space bounds</li>
     <li class="fragment fade-up">Enable transportation of <u>liveness</u> properties from source to machine code</li>
   </ul>
+  <aside class="notes">
+    <ul>
+      <li>We set out to do this with the following objectives:</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -213,8 +227,12 @@
     <li class="fragment fade-up">Proof of <u>soundness</u> w.r.t a compiler that relies on (verified) garbage collection</li>
     <li class="fragment fade-up">Prove of <u>concrete and tight bounds</u> for a number of examples (non-terminating, higher-order, and bignum)</li>
   </ul>
+  <aside class="notes">
+    <ul>
+      <li>This papers contributions are</li>
+    </ul>
+  </aside>
   </section>
-
 
 <section>
   <p>Why do programs run out of memory?</p>
@@ -226,9 +244,21 @@
   </ul>
   <aside class="notes">
     <ul>
-      <li>One or more objects sizes grow to big and exhausting the heap</li>
-      <li>Too many nested function calls fill the stack completely</li>
-      <li>An array which keeps track of its lenght on a header</li>
+      <li>So why do programs run out of memory any way?</li>
+      <li>It can run out of heap</li>
+      <ul>
+        <li>This is when a single or a set of objects grow so large in size that they
+            exhausts the available heap space
+        </li>
+      </ul>
+      <li>Alternatively, it can run out of stack</li>
+      <lu><li>Here, a large number of yet-to-return nested functions fill the call-stack completely</li></lu>
+      <li>And Finally, and perhaps more exotic, its when an object exceed its representation limit</li>
+      <ul>
+        <li> For example, if an array representation uses, say, 3bits in its header to keep track of its length,
+             one can exceed this representation by simply concatenation to arrays of length 6.
+        </li>
+      </ul>
     </ul>
   </aside>
 </section>
@@ -238,8 +268,10 @@
   <aside class="notes">
     <ul>
       <li>So where do out-memory-errors appear in CakeML?</li>
-      <li>the structure of CakeML, unsurprisingly,
+      <li>the structure of the CakeML compiler, unsurprisingly,
           looks like a cake, in the sense that it has many layers</li>
+      <li>Each the layer corresponds to a compilation phase or an optimization</li>
+      <li>This approach keeps things modular for both proofs and implementation</li>
     </ul>
   </aside>
 </section>
@@ -261,11 +293,8 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>Tracktable the higher and precise the lower</li>
-      <li>For higher level language adding a cost semantics
-          would either be too loose or it will overcomplicate the
-          semantics with implementation details of later phases
-      </li>
+      <li>The higher in the stack the more tractable and high level a language is</li>
+      <li>While lower levels are more concrete and close to the machine code</li>
     </ul>
   </aside>
 </section>
@@ -285,6 +314,11 @@
       <div data-id="il10"><code>Machine code</code></div>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>When it comes to the representation of memory, it is worth nothing that...</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -302,31 +336,79 @@
       <div data-id="il10"><code>Machine code</code></div>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>The first 6 languages in the stack have semantics that lack any form of out-memory behaviours</li>
+      <li>Or in other words, theirs memory models have unlimited space</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
   <div class="r-vstack items-center">
   <div class="r-hstack items-start">
     <div data-id="il1"><code>CakeML</code></div>
-    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="eq1" style="margin:0 10pt 0 10pt"><code> = </code></div>
     <div data-id="il2"><code>flatLang</code></div>
-    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="eq2" style="margin:0 10pt 0 10pt"><code> = </code></div>
     <div data-id="il3"><code>closLang</code></div>
-    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="eq3" style="margin:0 10pt 0 10pt"><code> = </code></div>
     <div data-id="il4"><code>BVL</code></div>
-    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="eq4" style="margin:0 10pt 0 10pt"><code> = </code></div>
     <div data-id="il5"><code>BVI</code></div>
-    <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+    <div data-id="eq6" style="margin:0 10pt 0 10pt"><code> = </code></div>
     <div data-id="il6"><code>dataLang</code></div>
   </div>
   <div class="r-vstack items-center">
-    <div>$\subseteq$</div>
+    <div data-id="subeq">$\subseteq$</div>
     <div data-id="il7"><code>wordLang</code></div>
     <div data-id="il8"><code>stackLang</code></div>
     <div data-id="il9"><code>labLang</code></div>
     <div data-id="il10"><code>Machine code</code></div>
   </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>So the relationship between the behaviours of these languages is an equality</li>
+      <li>It is only at the point when memory become more concrete that the subset relation is introduced</li>
+    </ul>
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div class="r-hstack items-start">
+      <div data-id="il1"><code>CakeML</code></div>
+      <div data-id="eq1" style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il2"><code>flatLang</code></div>
+      <div data-id="eq2" style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il3"><code>closLang</code></div>
+      <div data-id="eq3" style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il4"><code>BVL</code></div>
+      <div data-id="eq4" style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il5"><code>BVI</code></div>
+      <div data-id="eq6" style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il6"><code>dataLang</code></div>
+    </div>
+    <div class="r-vstack items-center">
+      <div data-id="subeq">$\subseteq$</div>
+    </div>
+    <div class="r-hstack items-start">
+      <div data-id="il7"><code>wordLang</code></div>
+      <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il8"><code>stackLang</code></div>
+      <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il9"><code>labLang</code></div>
+      <div style="margin:0 10pt 0 10pt"><code> = </code></div>
+      <div data-id="il10"><code>Machine code</code></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>It is worth noting that all the languages at the bottom also share an equality relation</li>
+      <li>So, when we considered where to do our space reasoning the first obvious candidate was...</li>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -350,13 +432,16 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>The initially great upsides very quicky turned into downsides</li>
-      <li>Extending the source semantics to accomodate a space reasoning either:
+      <li>CakeML</li>
+      <li>It is the source language after all, and is what you use to write your programs</li>
+      <li>It is high level so one does not have to deal with allocation or pointer as much</li>
+      <li>However, the initially great upsides very quicky turn into downsides</li>
+      <li>Extending the source semantics to accommodate a space reasoning at such a
+          high level in the language stack requires either:</li>
         <ul>
-          <li>Make the semantics too comples by embeding all compilers phases and optimizations on it</li>
-          <li>Or Completely ignore all that and be too loose</li>
+          <li>A complex space semantics that contains basically all compilers phases and optimizations within it</li>
+          <li>Or Completely ignore all that and provide a very loose upper bound</li>
         </ul>
-      </li>
       <li>Both of those alternatives did not met our objectives so we went back to the drawing board</li>
     </ul>
   </aside>
@@ -407,11 +492,15 @@
   </ul>
   <aside class="notes">
     <ul>
-      <li>By abstract values we mean not using words for everything</li>
-      <li>So pretty much everything we need to be able to
-          talk about running out of memory is here in a concrete enough way</li>
-      <li>Bonus point, most of the optimizations have already happened by
-          this point on the compilations so there is no need to accomodate for that</li>
+      <li>It is imperative, so it is easy to step through each instruction and see what effect it had on memory</li>
+      <li>It provides abstract values, meaning not everything is represented using and there is a bit of structure to values</li>
+      <li>It has stateful storage, so actual variables instead of bindings</li>
+      <li>And finally, it has an explicit call-stack, unlike all languages above it</li>
+      <li>So pretty much everything we need to be able to reason about running out of memory is here
+          in a concrete enough way, a stack, the heap, variables and values.
+      </li>
+      <li>Additionally, it gets bonus points for being at a place in the language stack where most optimizations
+          and tricky compiler phases have already happened simplifying our task greatly</li>
     </ul>
   </aside>
 </section>
