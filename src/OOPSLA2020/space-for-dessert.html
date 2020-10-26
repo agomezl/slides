@@ -517,8 +517,8 @@
       do 4 :≡ (TagLenEq 0 0,[0],NONE);
          if_var 4 (return 1) # Nil case, return e
            # Cons case
-           do 6 :≡ (ElemAt 0,[0],NONE);  # head
-              7 :≡ (ElemAt 1,[0],NONE);  # tail
+           do 6 :≡ (ElemAt 0,[0],NONE);  # head (x)
+              7 :≡ (ElemAt 1,[0],NONE);  # tail (xs)
               ...
               # f x e
               call (18,⦕ 2; 7 ⦖) NONE [6; 1; 2; 15] NONE;
@@ -528,22 +528,22 @@
     <ul>
       <li>
         However, <code>dataLang</code> is NOT source CakeML and there
-        is of course a quite clear downside to write your programs on language and
-        have to reason about them in another.
+        is of course a clear downside from writing your programs on a language and
+        have to reason about it in another.
       </li>
       <li>
         But we have improved our infrastructure to facilitate this task,
-        and to in our experience things don't look so bad down there!
+        as much as possible.
       </li>
       <li>
-        dataLang can be displayed using a monading representation
+        Lets consider as an example the <code>FOLDL</code> function,
+        implemented in the source language at the top
+        and compiled into dataLang at the bottom
       </li>
       <li>
-        Funtion names are preserved as appropiately named constants
-      </li>
-      <li>
-        Varibles in data lang are numeric thus to better show the similarity
-        we replace them with a more familiar notation
+        Variables in data lang are numeric thus to better show the similarity
+        we replace them here with their corresponding source names.
+        However, the relation between them is still one-to-one.
       </li>
     </ul>
   </aside>
@@ -570,6 +570,12 @@
   </code></pre>
   <aside class="notes">
     <ul>
+      <li>
+        dataLang can be displayed using a monadic representation, which improves readability
+      </li>
+      <li>
+        Function names are preserved all the way from source into dataLang so it is easy to know what is what
+      </li>
       <li>Arguments are the same, just in reverse</li>
       <li>First a case distinction is performed</li>
       <li>On the nil case the base value is returned </li>
@@ -596,8 +602,14 @@
   <aside class="notes">
     <ul>
       <li>Values in dataLang are presented by this data type</li>
+      <ul>
+        <li>We have unbounded integers</li>
+        <li>Words</li>
+        <li>Blocks of contiguous values with a constructor tag and a uniqueness timestamp</li>
+        <li>Code pointer</li>
+        <li>Value pointers</li>
+      </ul>
     </ul>
-
   </aside>
 </section>
 
@@ -615,6 +627,20 @@
       ]
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>As an example lets take the list <code>[1,2,3]</code> which is represented in dataLang as follows</li>
+      <ul>
+        <li>The first block contains contains the head of the list (<code>Number 1</code>) as its first value</li>
+        <li>Followed by the tail of the list, which is again a list and is represented with a block as well</li>
+        <li>The tail follows the same structure as before, with its firs element (<code>Number 2</code>) being the head of the tail</li>
+        <li>Followed again by the tail of the tail</li>
+        <li>You can see how the original structure of the list value is represented using blocks</li>
+        <li>It is also worth pointing out that each block represents a constructor which is identified by the tag value</li>
+        <li>and that each non-empty block has an unique timestamp</li>
+      </ul>
+    </ul>
+  </aside>
 </section>
 
 <section data-auto-animate>
@@ -632,7 +658,20 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>Defines as functional bigstep semantics</li>
+      <li>The semantics of dataLang is defined using a functional bigstep semantics</li>
+      <li>it takes a program and a state, and returns a result with an updated state</li>
+      <li>The state contains everything needed to execute the dataLang program, here we
+          display only the field relevant to our memory model
+      </li>
+      <ul>
+        <li><code>locals</code> contains all variables in the scope of the current function</li>
+        <li><code>stack</code> is the call-stack</li>
+        <li><code>refs</code> is a map from pointers to values</li>
+        <li>and <code>global</code> contains global values that can be accessed from everywhere</li>
+      </ul>
+      <li>We can see from the state then, that even though dataLang's memory model is unbounded,
+          one can still concretely "see" both heap and stack
+      </li>
     </ul>
   </aside>
 </section>
@@ -655,9 +694,17 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>So we have everything we need to measure and keep track of memory, how do we do it then?</li>
+      <li>So, to keep track of memory consumption we extended with a number of extra fields</li>
+      <ul>
+        <li><code>limits</code> contains concrete bounds for heap and stack</li>
+        <li>
+            <code>safe_for_space</code> is always initially true and signals when
+            the programs has surpassed one of the <code>limits</code>
+        </li>
+        <li><code>stack_max</code> records the maximum stack size seen during execution</li>
+      </ul>
+      <li>With this we have everything we need to measure and keep track of memory, how do we do it then?</li>
     </ul>
-
   </aside>
 </section>
 
@@ -681,6 +728,24 @@
       </ul>
     </div>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>The main ideas is to measure the size of both heap and stack at relevant points during execution</li>
+      <li>We measure heap at every allocation</li>
+      <li>and before every heap consuming operations, for example, the addition of two bignums which might
+          require allocating some extra space for its result
+      </li>
+      <li>The size of the stack is measured at every function call</li>
+      <li>and before each stack consuming operations, this are operation
+          that are implemented in lower languages either recursively or as
+          multiple calls to other functions
+      </li>
+      <li>By doing this we can make sure space consumptions remains withing the limits, or,
+          in case it doesn't, set <code>safe_for_space</code> to false
+      </li>
+    </ul>
+
+  </aside>
 </section>
 
 <section>
@@ -693,9 +758,19 @@
         in
           s with <| safe_for_space :=
                       s.safe_for_space ∧
-                      new_stack < s.limits.stack_limit |>
+                      new_stack < s.limits.stack_limit;
+                    stack_max := new_stack |>
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>This is the measurement of stack size that is performed after a function call</li>
+      <li>First we make a conjunction with the current value of <code>safe_for_space</code></li>
+      <li>Then we measure the current size of the stack, and obtain the maximum this measurement and the largest previous measurement</li>
+      <li>We check if this <code>new_stack</code> is still within the limits and update <code>safe_for_space</code> accordingly</li>
+      <li>Finally we update <code>stack_max</code> to reflect any changes</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -710,6 +785,31 @@
                       new_heap < s.limits.heap_limit |>
     </code></pre>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>Conversely, this is the measurement of heap size before a heap consuming operation is performed</li>
+      <li>Again, we make a conjunction with the current value of <code>safe_for_space</code></li>
+      <li>Then we measure the amount of heap performing the operation will require, this is, the size of
+          the current heap plus the space needed to perform the operation</li>
+      <li><code>space_consumed</code> is a characterization of the space needed to perform an operation in terms of its arguments</li>
+      <li>Finally, we check if our <code>new_heap</code> is within the limits and update <code>safe_for_space</code> accordingly</li>
+      <li>This extra measurements and checks are the only changes made to the semantics
+      </li>
+      <li>
+        No new behaviours where added to dataLang's semantics; In fact, if one ignores the new fields the final result is the same as it
+        was before the changes
+      </li>
+      <li>
+        If <code>safe_for_space</code> turns false at any point the semantics will continue evaluating the program.
+      </li>
+      <li>
+        However, the state of the final result will contain via <code>safe_for_space</code>
+        an indicator of wether or not our program has ran out of memory
+      </li>
+    </ul>
+
+  </aside>
+
 </section>
 
 <section>
@@ -727,8 +827,22 @@
       <li>(<code>seen</code>) timestamps we have already seen</li>
     </ul>
   </div>
+  <aside class="notes">
+    <ul>
+      <li>We measure using the function <code>size_of</code></li>
+      <li>It takes as arguments</li>
+      <ul>
+        <li>A list of values</li>
+        <li>A mapping from number to values, this is what pointer are pointing to</li>
+        <li>And a set of seen timestamps</li>
+      </ul>
+      <li> <code>size_of</code> traverses the list measuring the size of each value,
+           but it make sure to avoid counting the same pointer multiple times, and
+           mitigates aliasing of blocks using timestamps
+      </li>
+    </ul>
+  </aside>
 </section>
-
 
 <section>
   <pre><code class="hljs haskell" data-trim data-line-numbers="3">
@@ -748,6 +862,16 @@
       ]
     ]
   </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>To see how this works lets briefly recall how values are represented in dataLang</li>
+      <li>Specifically how a block contain not only a list of
+          values and a constructor tag but an uniquely identifying timestamp</li>
+      <li>This timestamp is important since the semantics ensures that if two blocks have the same timestamps their
+          contents must be the same, because they are the same value in memory
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <section>
@@ -770,6 +894,16 @@
   <pre><code class="hljs haskell" data-trim>
     2
   </code></pre>
+  <aside class="notes">
+    <ul>
+      <li>In this example we are measuring the size of two blocks, we assume <code>seen</code>
+          is initially empty and <code>refs</code> is the one currently in the state</li>
+      <li>The size of the first block is 2, one word for its tag, and one for its only element the small number 1</li>
+      <li>We continue traversing the list, but the set of seen timestamps is updated with the timestamp we just saw</li>
+      <li>So when we reach the next block we check if the timestamp has already been seen, this is in deed the case</li>
+      <li>This means we don't need to measure this block since its size has already been accounted for</li>
+    </ul>
+  </aside>
 </section>
 
 <section>
