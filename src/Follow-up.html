@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Follow-up 2021</title>
+
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <!-- Main theme -->
+    <link rel="stylesheet" href="../dist/theme/personal.css" id="theme">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/zenburn.css" id="highlight-theme">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="../dist/fa/css/all.css">
+
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- TITLE -->
+        <section style="text-align: right;">
+          <h4>Follow-up Meeting</h4>
+          <hr/>
+          <p>Alejandro Gómez-Londoño</p>
+          <p>5th May 2021</p>
+        </section>
+
+        <!-- INTRO -->
+        <section>
+          <h4>Outline</h4>
+          <hr/>
+          <div style="text-align:left">
+            <ul>
+              <li>Current research</li>
+              <li>Planned projects</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Cost semantics -->
+        <section data-external="Follow-up/data-cost.html"> </section>
+
+        <!-- Choreographies -->
+        <section data-external="Follow-up/choreographies.html"> </section>
+
+        <section>
+          <section>
+            <h4>Planned projects</h4>
+            <hr/>
+          </section>
+
+          <section>
+            <blockquote>
+              A flat reachability-based measure for a verified cost semantics
+            </blockquote>
+          </section>
+
+          <section>
+            <div style="text-align:left">
+              <ul>
+                <li class="fragment fade-up">A follow-up to the cost semantics project.</li>
+                <li class="fragment fade-up">The current <code>size_of</code> measure is quite tricky to reason about.</li>
+                <li class="fragment fade-up">Using a flat representation of all reachable objects in the heap, we
+                    can more easily talk about changes to it.</li>
+                <li class="fragment fade-up">This measure can be implemented in a way that does not break existing proofs.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <blockquote>
+              Composing CakeML programs with choreographies
+            </blockquote>
+          </section>
+
+          <section>
+            <div style="text-align:left">
+              <ul>
+                <li class="fragment fade-up">Currently each projected endpoint gets its own theorem which assumes all other endpoints are around.</li>
+                <li class="fragment fade-up">A stronger guarantee is a single global theorem that talks about all endpoints being projected.</li>
+                <li class="fragment fade-up">Possibility of collaboration with ongoing work on new interaction tree semantics for CakeML.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <blockquote>
+              Verified systems using Choreographies and CakeML on seL4
+            </blockquote>
+          </section>
+
+          <section>
+            <div style="text-align:left">
+              <ul>
+                <li class="fragment fade-up">A case study of a verified concurrent system.</li>
+                <li class="fragment fade-up">All components are defined using choreographies.</li>
+                <li class="fragment fade-up">Each component is a CakeML program with a proof of correctness.</li>
+                <li class="fragment fade-up">The whole system runs on the Sel4 microkernel.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <blockquote>
+              Data-cost on choreography endpoints
+            </blockquote>
+          </section>
+
+          <section>
+            <div style="text-align:left">
+              <ul>
+                <li>Proof for one or more endpoints that local computations do not run out of memory.</li>
+              </ul>
+            </div>
+          </section>
+      </section>
+
+      <section>
+        <h1><img style="vertical-align:bottom;margin:0;min-width: 15%;" src="Lic/CakeML.svg"/></li>?</h1>
+      </section>
+
+      </div>
+    </div>
+
+    <!-- Plugins and initialization -->
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/zoom/zoom.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/search/search.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/math/math.js"></script>
+    <script>
+     // More info about initialization & config:
+     // - https://revealjs.com/initialization/
+     // - https://revealjs.com/config/
+     Reveal.initialize({
+       hash: true,
+       slideNumber: 'h/v',
+       transition: 'none',
+       plugins: [ RevealZoom,
+                  RevealNotes,
+                  RevealSearch,
+                  RevealMarkdown,
+                  RevealHighlight,
+                  RevealMath
+       ],
+       math : { mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+                config: 'TeX-AMS_HTML-full',
+       },
+       dependencies: [
+         { src: '../plugin/external/external.js',
+           condition: function() { return !!document.querySelector( '[data-external]' );
+           }}]
+     });
+    </script>
+  </body>
+</html>

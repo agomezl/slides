@@ -1,0 +1,137 @@
+<section>
+  <h4>Cost semantics</h4>
+  <hr/>
+</section>
+
+<section data-auto-animate>
+  <img style="min-width: 20%;" src="Lic/CakeML.svg"/>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 80%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:50%;">
+      <ul>
+        <li>Functional language</li>
+        <li>Proven-correct compiler</li>
+        <li>Able to bootstrap itself</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <img style="min-width: 60%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div>
+      <h2><code>&lt;-&gt;</code></h2>
+      <p class="fragment">&#x1F91D;</p>
+    </div>
+    <div style="width:30%;" class="r-vstack items-center">
+      <div style="padding : 10px 20px 10px 20px;" class="block">
+        <div><i  class="far fa-file-alt"></i></div>
+        <p style="margin:0 0 0 0;"><code>.asm</code></p>
+      </div>
+    </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\,\subseteq\\
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <table class="rule">
+      <tbody>
+        <tr><td style="border: none;">
+          $\text{extend_with_resource_limit}(\text{source_sem}\,prog)$
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          <i data-id="a1" class="fas fa-arrow-down"></i>
+        </td></tr>
+        <tr class="fragment"><td style="border: none;">
+          $\text{source_sem}\,prog\,\cup$ &#x1F4A5;
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F91D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)\subseteq\\
+          \text{extend_with_resource_limit}(\text{source_sem}\,prog)$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\text{machine_sem}\,(\text{compile}\,prog)=\text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>&#x2705; &#x1F449; &#x1F44D;</p>
+    <table class="rule">
+      <tbody>
+        <tr><td>$\bbox[background-color: #f19a3e]{\text{is_safe}\,prog} \implies \\
+          \text{machine_sem}\,(\text{compile}\,prog)=
+          \text{source_sem}\,prog$</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fragment fade-up"><i>*Wildly oversimplified</i></div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:60%;">
+      <img src="Follow-up/cost_paper.png"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:40%;">
+      <img src="Follow-up/cost_paper.png"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="text-align:left">
+      <ul>
+        <li>Cost semantics proved sound w.r.t compiler</li>
+        <li>Concrete examples with tight bounds</li>
+        <li>Published on OOPSLA 2020</li>
+      </ul>
+    </div>
+  </div>
+</section>

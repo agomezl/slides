@@ -1,0 +1,298 @@
+<section>
+  <h4>Choreographies</h4>
+  <hr/>
+</section>
+
+<section>
+  <blockquote>
+    Choreographies are a way of describing communicating
+    systems as global programs
+  </blockquote>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="|1">
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+      </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="1|2">
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="2|3">
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="3|4">
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        send("A",x)
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        x = receive("A")
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <div style="width:45%">
+      <pre data-id="chor"><code class="hljs js" data-trim data-line-numbers="4">
+        let x@A = crunch()
+        let y@B = crunch()
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <hr data-id="line" style="align-self:stretch"/>
+    <div class="r-hstack items-center" style="align-self:stretch">
+      <div style="width:45%;">
+        <p>A</p>
+        <pre data-id="a-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        x = crunch()
+        send("B",x)
+        y = receive("B")
+        </code></pre>
+      </div>
+      <div style="width:10%;">
+      </div>
+      <div style="width:45%;">
+        <p>B</p>
+        <pre data-id="b-code"><code class="hljs python" data-trim
+                                    data-line-numbers=>
+        y = crunch()
+        x = receive("A")
+        send("A",y)
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+
+
+<section>
+  <p>Features</p>
+  <hr/>
+  <div style="text-align:left">
+    <ul>
+      <li>Concurrency</li>
+      <li>Asynchrony</li>
+      <li>Confluence</li>
+      <li>Deadlock-freedom</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Deadlock-freedom -->
+
+
+<!-- The road to CakeML -->
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:20%;">
+      <img data-id="cake" style="min-width: 65%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a2" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e1" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:40%;">
+      <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:30%;">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        A[x] -> B.x
+        B[y] -> A.y
+      </code></pre>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a2" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e2" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <i data-id="d1" class="fas fa-ellipsis-h"></i>
+    </div>
+    <div style="width:12%;">
+      <h2><i data-id="e1" class="far fa-file-alt"></i></h2>
+    </div>
+    <div style="width:10%;">
+      <h2><i data-id="a1" class="fas fa-arrow-right"></i></h2>
+    </div>
+    <div class="r-vstack items-start" style="width:40%;">
+      <img data-id="cake" style="min-width: 40%; margin-left:20px;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div class="r-vstack items-center" style="width:10%;">
+      <img style="min-width: 65%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:5%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:10%;">
+      <i data-id="d1" class="fas fa-ellipsis-h"></i>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:5%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div class="r-vstack items-center" style="width:10%;">
+      <img style="min-width: 65%;" src="Lic/CakeML.svg"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:5%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="width:10%;">
+      <i data-id="d1" class="fas fa-ellipsis-h"></i>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:5%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div class="r-vstack items-center" style="width:10%;">
+      <img style="min-width: 65%;" src="Lic/CakeML.svg"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-start">
+    <div style="width:60%;">
+      <img src="Lic/chor_paper.png"/>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-hstack items-center">
+    <div style="width:40%;">
+      <img src="Lic/chor_paper.png"/>
+    </div>
+    <div data-id="vl" class="r-hstack" style="width:10%;align-self:stretch;">
+      <div class="vl"></div>
+    </div>
+    <div style="text-align:left">
+      <ul >
+        <li>Verified choreography compiler</li>
+        <li>Submitted to CONCUR2021</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
