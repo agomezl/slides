@@ -1,0 +1,209 @@
+<section style="text-align: right;">
+  <h4>Choreograhies in <code data-id="acl2">ACL2</code></h4>
+  <hr/>
+  <p>Alejandro Gomez-Londoño</p>
+  <p>5th of November 2020</p>
+</section>
+
+<section>
+  <p><a>A</a> <a>C</a>omputational <a>L</a>ogic for <a>A</a>pplicative <a>C</a>ommon <a>L</a>isp</p>
+  <hr/>
+  <ul>
+    <li>Terms are untyped</li>
+    <li>The logic is first order</li>
+    <li>All functions are total</li>
+  </ul>
+</section>
+
+<section>
+  <p>The Method</p>
+  <hr/>
+  <ol>
+    <li class="fragment fade-up">Try to prove a lemma</li>
+    <li class="fragment fade-up">It most likely will fail, but prints useful information (checkpoints)</li>
+    <li class="fragment fade-up">Look at the checkpoints and find extra lemmas that might help</li>
+    <li class="fragment fade-up">Write the lemma in a way that is useful for you main lemma</li>
+    <li class="fragment fade-up">Apply the method on the extra lemmas</li>
+    <li class="fragment fade-up">Go to step 1</li>
+  </ol>
+</section>
+
+<section>
+  <ul>
+    <li class="fragment fade-up">
+      <code>Nil</code> means false, anything else is true (numbers,strings,pairs and symbols)
+    </li>
+    <li class="fragment fade-up">
+      The theorem prover is mostly automatic, but you can provide hints!
+    </li>
+    <li class="fragment fade-up">
+      I hope you like parentheses
+    </li>
+  </ul>
+</section>
+
+<section>
+  <p>Choreograhies</p>
+  <hr/>
+  <blockquote>
+    Choreographies are a way of describing communicating
+    systems as global programs
+  </blockquote>
+</section>
+
+<section>
+  <div class="r-vstack items-center">
+    <div style="width:30%">
+      <pre data-id="chor"><code class="hljs js" data-trim>
+        A[2] -> B.y
+        P[3] -> Q.w
+        C[1] -> D.k
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+  </div>
+</section>
+
+<!-- Concurrency -->
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Concurrency</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div class="fragment" style="width:30%;"
+           data-fragment-index="2">
+        <pre data-id="chor"><code class="hljs js" data-trim>
+           A[2] -> B.y
+           P[3] -> Q.w
+                &#x2705;
+        </code></pre>
+      </div>
+      <div class="fragment"
+           data-fragment-index="2">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[2] -> B.y
+              P[3] -> Q.w
+              C[1] -> D.k
+          </code></pre>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="3">
+          <h2><i data-id="a1" class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div style="width:100%;" class="fragment"
+             data-fragment-index="3">
+          <pre data-id="chor"><code class="hljs js" data-trim>
+              A[2] -> B.y
+                   &#x2705;
+              C[1] -> D.k
+          </code></pre>
+        </div>
+      </div>
+      <div class="fragment"
+           data-fragment-index="1">
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div style="width:30%;" class="fragment"
+           data-fragment-index="1">
+        <pre data-id="chor"><code class="hljs js" data-trim>
+                &#x2705;
+           P[3] -> Q.w
+           C[1] -> D.k
+        </code></pre>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Deals with unrelated operations</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- Asyncrony -->
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asyncrony</p>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <div class="r-vstack items-center">
+    <p>Asyncrony</p>
+    <div class="r-hstack items-start" style="width:100%;">
+      <div class="fragment" style="width:30%;" data-fragment-index="3">
+        <pre ><code class="hljs js" data-trim>
+             A[2] -> B.y
+             P[3] -> A.w
+                  &#x274C;
+        </code></pre>
+      </div>
+      <div class="fragment" data-fragment-index="3">
+        <h2><i class="fas fa-arrow-left"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div style="width:100%;">
+          <pre><code class="hljs js" data-trim>
+              A[2] -> B.y
+              P[3] -> A.w
+              A[1] -> D.k
+          </code></pre>
+        </div>
+        <div class="fragment" data-fragment-index="2">
+          <h2><i class="fas fa-arrow-down"></i></h2>
+        </div>
+        <div class="fragment" style="width:100%;" data-fragment-index="2">
+          <pre><code class="hljs js" data-trim>
+              A[2] -> B.y
+                   &#x2705;
+              A[1] -> D.k
+          </code></pre>
+        </div>
+      </div>
+      <div class="fragment" data-fragment-index="1">
+        <h2><i class="fas fa-arrow-right"></i></h2>
+      </div>
+      <div class="r-vstack items-center" style="width:30%;">
+        <div class="fragment" style="width:100%;" data-fragment-index="1">
+          <pre><code class="hljs js" data-trim>
+                &#x2705;
+           P[3] -> A.w
+           A[1] -> D.k
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p>Confluence</p>
+</section>
+
+<section>
+  <div>
+    <img style="max-width: 95%;" src="Lic/confluence.png"/>
+  </div>
+</section>
+
+<section>
+  <div class="r-vstack items-center">
+    <p>Deadlock-freedom</p>
+    <table class="rule fragment fade-up">
+      <tbody>
+          <tr><td>
+             $c \rightarrow^{\ast} end$
+          </td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
