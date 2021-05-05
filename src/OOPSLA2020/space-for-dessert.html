@@ -555,14 +555,14 @@
     FOLDL f e (x::xs) = FOLDL f (f e x) xs
   </code></pre>
   <hr/>
-  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10-12">
+  <pre><code class="hljs python" data-trim data-line-numbers="|1|2-4|6-8|10|11">
     foldl [l; e; f] =
       # LENGTH l = 0?
       do isNil :≡ (TagLenEq 0 0,[l],NONE);
          if_var isNil (return e) # Nil case, return e
            # Cons case
-           do x  :≡ (ElemAt 0,[l],NONE);  # head
-              xs :≡ (ElemAt 1,[l],NONE);  # tail
+           do x  :≡ (ElemAt 0,[l],NONE);  # head (x)
+              xs :≡ (ElemAt 1,[l],NONE);  # tail (xs)
               ...
               # f x e
               call (e1,⦕ f; xs ⦖) NONE [x; e; f] NONE;
@@ -570,24 +570,27 @@
   </code></pre>
   <aside class="notes">
     <ul>
+      <li>So, the dataLang version of <code>FOLDL</code></li>
       <li>
-        dataLang can be displayed using a monadic representation, which improves readability
+        is displayed using a monadic representation, which improves readability
       </li>
       <li>
-        Function names are preserved all the way from source into dataLang so it is easy to know what is what
+        additionally Function names are preserved all the way from source into dataLang so it is easy to know what is what
       </li>
-      <li>Arguments are the same, just in reverse</li>
-      <li>First a case distinction is performed</li>
-      <li>On the nil case the base value is returned </li>
-      <li>For the cons case, head and tail are obtaines
-        and the new base value is computed by calling
-        function f with the corresponding arguments
-      </li>
-      <li>Finally a tail recursive call is performed</li>
+      <li>For the code itself, Arguments are the same, they are just passed in reverse</li>
+      <li>The first few operation a case distinction over our list argument <code>l</code></li>
+      <li>If <code>l</code> is nil base value is returned, just like in the first pattern of the source function </li>
+      <li>Otherwise, we are in the cons case</li>
+      <li>Here, head and tail are obtained</li>
+      <li>Follow by a call to our function argument <code>f</code> which generate the new base value</li>
+      <li>Finally a tail recursive call is performed with the tail, the new base values and the origanal function f</li>
+      <li>We can see then, that the original structure of the <code>FOLDL</code> function is somewhat preserved</li>
+      <li>And in our expericen this extends to other functions as well</li>
+      <li>However, some understaing of dataLang syntax and semantics is offcourse requiered</li>
+      <li>on that note...</li>
     </ul>
   </aside>
 </section>
-
 
 <section>
   <div class="r-hstack items-center">
@@ -601,6 +604,7 @@
   </div>
   <aside class="notes">
     <ul>
+      <li>lets tal about data lang values</li>
       <li>Values in dataLang are presented by this data type</li>
       <ul>
         <li>We have unbounded integers</li>
@@ -967,7 +971,7 @@
        let (res,s') = evaluate (prog,s)
        in s'.safe_for_space
   </code></pre>
-  <aside>
+  <aside class="notes">
     <ul>
       <li>Our safety predicate is then defined in terms of the evaluation of a dataLang program</li>
       <li>we say that a source program is safe if the evaluation of its dataLang representation
@@ -987,7 +991,7 @@
     </table>
   </div>
   <div class="fragment fade-up"><i>(See paper for actual statement.)</i></div>
-  <aside>
+  <aside class="notes">
     <ul>
       <li>We have proven that if a program <code>is_safe</code> no out-of-memory behaviours can occur in the machine code</li>
       <li>Which implies that the relation between source and machine code can be proven to be an equality</li>
